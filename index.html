@@ -3,11 +3,421 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>走吧！</title>
-    
+    <title>走吧！待訪清單</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        .loading-spinner {
+            border: 4px solid rgba(38, 70, 83, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid #264653;
+            width: 45px;
+            height: 45px;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        #appLayout { display: none !important; }
+        .animate-fadeIn { animation: fadeIn 0.35s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-popOut { animation: popOut 0.3s ease-in forwards; }
+        @keyframes popOut { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(0.85); } }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .spot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 14px;
+        }
+        select { background-image: none; }
+    </style>
 </head>
-<body class="min-h-screen p-4 flex flex-col justify-between select-none" style="background-color:#C8DDF0; color:#1A2E4A;">
+<body class="min-h-screen p-4 select-none" style="background-color:#EFF6F4; color:#264653;">
 
-   1
+    <!-- Alert Modal -->
+    <div id="modalBackdrop" class="fixed inset-0 backdrop-blur-sm z-40 transition-opacity duration-300 opacity-0 pointer-events-none" style="background:rgba(38,70,83,0.4);"></div>
+    <div id="customAlert" class="fixed inset-x-4 top-1/3 max-w-sm mx-auto z-50 border p-6 rounded-3xl shadow-2xl transition-all duration-300 transform scale-90 opacity-0 pointer-events-none text-center space-y-4" style="background:#fff; border-color:#CFE3DD;">
+        <div class="mx-auto w-12 h-12 rounded-full flex items-center justify-center text-2xl" id="alertIconBg">
+            <span id="alertIcon">⚠️</span>
+        </div>
+        <div class="space-y-1">
+            <h3 id="alertTitle" class="text-base font-black tracking-wider" style="color:#264653;">系統提示</h3>
+            <p id="alertMessage" class="leading-relaxed whitespace-pre-line" style="color:#5A7D75; font-size:14px;"></p>
+        </div>
+        <button onclick="closeAlert()" id="alertConfirmBtn" class="w-full font-bold py-2.5 px-4 rounded-xl text-xs tracking-wider transition duration-200 shadow" style="background:#264653; color:#fff; border:none;">
+            確認
+        </button>
+    </div>
+
+    <!-- Splash Screen -->
+    <div id="splashScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center space-y-3" style="background-color:#EFF6F4;">
+        <div class="loading-spinner"></div>
+        <p class="text-xs font-semibold tracking-widest animate-pulse" style="color:#26465399;">正在準備待訪清單</p>
+    </div>
+
+    <div id="appLayout" class="w-full max-w-5xl mx-auto">
+
+        <header class="text-center pt-2 pb-4">
+            <h1 class="text-2xl font-black tracking-wider" style="color:#264653;">走吧！待訪清單</h1>
+            <p class="text-xs font-bold mt-1" style="color:#5A7D75;">還沒去過的地方，挑一個出發吧</p>
+        </header>
+
+        <!-- 篩選與搜尋區 -->
+        <div class="rounded-2xl p-4 mb-4 shadow-sm space-y-3" style="background:#fff; border:1px solid #CFE3DD;">
+            <div class="relative">
+                <input type="text" id="searchInput" placeholder="搜尋名稱或關鍵字..." class="w-full rounded-xl py-2.5 pl-10 pr-4 text-sm font-bold focus:outline-none transition" style="background:#EFF6F4; border:1px solid #CFE3DD; color:#264653;">
+                <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-base" style="color:#5A7D75;">🔍</span>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2">
+                <div>
+                    <label class="block text-xs font-black mb-1" style="color:#5A7D75;">縣市</label>
+                    <div class="relative">
+                        <select id="filterCity" multiple class="hidden"></select>
+                        <button type="button" id="filterCityBtn" class="w-full rounded-xl py-2 px-3 text-xs font-bold text-left truncate" style="background:#EFF6F4; border:1px solid #CFE3DD; color:#264653;">全部</button>
+                        <div id="filterCityPanel" class="hidden absolute z-20 mt-1 w-full max-h-48 overflow-y-auto rounded-xl shadow-lg p-2 space-y-1" style="background:#fff; border:1px solid #CFE3DD;"></div>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-black mb-1" style="color:#5A7D75;">區域</label>
+                    <div class="relative">
+                        <select id="filterArea" multiple class="hidden"></select>
+                        <button type="button" id="filterAreaBtn" class="w-full rounded-xl py-2 px-3 text-xs font-bold text-left truncate" style="background:#EFF6F4; border:1px solid #CFE3DD; color:#264653;">全部</button>
+                        <div id="filterAreaPanel" class="hidden absolute z-20 mt-1 w-full max-h-48 overflow-y-auto rounded-xl shadow-lg p-2 space-y-1" style="background:#fff; border:1px solid #CFE3DD;"></div>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-black mb-1" style="color:#5A7D75;">類型</label>
+                    <div class="relative">
+                        <select id="filterType" multiple class="hidden"></select>
+                        <button type="button" id="filterTypeBtn" class="w-full rounded-xl py-2 px-3 text-xs font-bold text-left truncate" style="background:#EFF6F4; border:1px solid #CFE3DD; color:#264653;">全部</button>
+                        <div id="filterTypePanel" class="hidden absolute z-20 mt-1 w-full max-h-48 overflow-y-auto rounded-xl shadow-lg p-2 space-y-1" style="background:#fff; border:1px solid #CFE3DD;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between pt-1">
+                <span id="resultCount" class="text-xs font-bold" style="color:#5A7D75;">共 0 個地點</span>
+                <button id="btnClearFilter" class="text-xs font-bold underline" style="color:#2A9D8F;">清除篩選</button>
+            </div>
+        </div>
+
+        <!-- 卡片區 -->
+        <div id="spotGrid" class="spot-grid"></div>
+
+        <!-- 空白狀態 -->
+        <div id="emptyState" class="hidden flex flex-col items-center justify-center text-center py-16 space-y-3">
+            <span class="text-5xl">🗺️</span>
+            <p class="font-black text-base" style="color:#264653;"></p>
+            <p class="text-xs font-bold" style="color:#5A7D75;"></p>
+        </div>
+
+        <footer class="text-center py-6 text-xs font-bold tracking-wide" style="color:#5A7D75;">
+            AI 工具煉成記 • Sunny Tseng
+        </footer>
+    </div>
+
+    <div id="loadingOverlay" class="fixed inset-0 z-50 flex flex-col items-center justify-center space-y-4 hidden" style="background:rgba(239,246,244,0.95);">
+        <div class="loading-spinner"></div>
+        <p id="loadingText" class="text-sm font-bold tracking-widest animate-pulse" style="color:#264653;">處理中...</p>
+    </div>
+
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <script>
+        const N8N_WEBHOOK_URL = 'https://employee-handwrite-sitter.ngrok-free.dev/webhook/go';
+        const LIFF_ID = '2010409271-SmsBfGu3';
+
+        let allSpots = [];
+        let activeFilters = { 縣市: new Set(), 區域: new Set(), 類型: new Set() };
+        let searchKeyword = '';
+
+        // =========================================================================
+        // Alert Modal
+        // =========================================================================
+        function showAlert(msg, title = "系統提示", icon = "⚠️", type = "warning") {
+            const backdrop = document.getElementById('modalBackdrop');
+            const alertBox = document.getElementById('customAlert');
+            const alertIcon = document.getElementById('alertIcon');
+            const alertIconBg = document.getElementById('alertIconBg');
+            const alertTitle = document.getElementById('alertTitle');
+            const alertMessage = document.getElementById('alertMessage');
+            const confirmBtn = document.getElementById('alertConfirmBtn');
+
+            alertIcon.innerText = icon;
+            alertTitle.innerText = title;
+            alertMessage.innerText = msg;
+
+            alertIconBg.className = "mx-auto w-12 h-12 rounded-full flex items-center justify-center text-2xl";
+            confirmBtn.className = "w-full font-black py-2.5 px-4 rounded-xl text-xs tracking-wider transition duration-200 shadow border";
+
+            if (type === 'error') {
+                alertBox.style.borderColor = '#fca5a5';
+                alertIconBg.style.cssText = 'background:#FEE2E2;'; alertIconBg.classList.add('text-rose-500');
+                confirmBtn.style.cssText = 'background:#DC2626; color:#fff; border:none;';
+            } else if (type === 'success') {
+                alertBox.style.borderColor = '#6ee7b7';
+                alertIconBg.style.cssText = 'background:#D1FAE5;'; alertIconBg.classList.add('text-emerald-600');
+                confirmBtn.style.cssText = 'background:#264653; color:#fff; border:none;';
+            } else {
+                alertBox.style.borderColor = '#fcd34d';
+                alertIconBg.style.cssText = 'background:#FEF3C7;'; alertIconBg.classList.add('text-amber-600');
+                confirmBtn.style.cssText = 'background:#264653; color:#fff; border:none;';
+            }
+
+            backdrop.classList.remove('opacity-0', 'pointer-events-none');
+            backdrop.classList.add('opacity-100');
+            alertBox.classList.remove('scale-90', 'opacity-0', 'pointer-events-none');
+            alertBox.classList.add('scale-100', 'opacity-100');
+        }
+
+        function closeAlert() {
+            const backdrop = document.getElementById('modalBackdrop');
+            const alertBox = document.getElementById('customAlert');
+            backdrop.classList.remove('opacity-100');
+            backdrop.classList.add('opacity-0', 'pointer-events-none');
+            alertBox.classList.remove('scale-100', 'opacity-100');
+            alertBox.classList.add('scale-90', 'opacity-0', 'pointer-events-none');
+        }
+
+        // =========================================================================
+        // LIFF 初始化（含 1.5 秒防禦熔斷）
+        // =========================================================================
+        document.addEventListener("DOMContentLoaded", () => {
+            const fallbackUnlocker = setTimeout(() => {
+                console.warn("LIFF 啟動逾時，強制解鎖介面");
+                unlockUI();
+                loadSpots();
+            }, 1500);
+
+            if (!navigator.userAgent.includes("Line") && window.location.search.includes("dev=true")) {
+                clearTimeout(fallbackUnlocker);
+                unlockUI();
+                loadSpots();
+                return;
+            }
+
+            liff.init({ liffId: LIFF_ID }).then(() => {
+                clearTimeout(fallbackUnlocker);
+                if (!liff.isLoggedIn()) {
+                    liff.login();
+                } else {
+                    unlockUI();
+                    loadSpots();
+                }
+            }).catch(err => {
+                console.error("LIFF failed:", err);
+                clearTimeout(fallbackUnlocker);
+                unlockUI();
+                loadSpots();
+            });
+        });
+
+        function unlockUI() {
+            document.getElementById('splashScreen').style.display = 'none';
+            document.getElementById('appLayout').setAttribute('style', 'display: block !important;');
+        }
+
+        function toggleLoading(show, text = "處理中...") {
+            const overlay = document.getElementById('loadingOverlay');
+            document.getElementById('loadingText').innerText = text;
+            overlay.classList.toggle('hidden', !show);
+        }
+
+        // =========================================================================
+        // 資料載入 GET_SPOTS
+        // =========================================================================
+        async function loadSpots() {
+            toggleLoading(true, "正在讀取待訪清單...");
+            try {
+                const res = await fetch(N8N_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': 'true' },
+                    body: JSON.stringify({ action: 'GET_SPOTS' })
+                });
+                if (!res.ok) throw new Error('Webhook 回應失敗');
+                const data = await res.json();
+                allSpots = Array.isArray(data.spots) ? data.spots : [];
+                buildFilterOptions();
+                renderSpots();
+            } catch (err) {
+                console.error(err);
+                showAlert("無法讀取待訪清單，請確認網路連線後重新整理頁面。", "讀取失敗", "❌", "error");
+            } finally {
+                toggleLoading(false);
+            }
+        }
+
+        // =========================================================================
+        // 篩選選單建立
+        // =========================================================================
+        function buildFilterOptions() {
+            const cities = [...new Set(allSpots.map(s => s.縣市).filter(Boolean))].sort();
+            const areas = [...new Set(allSpots.map(s => s.區域).filter(Boolean))].sort();
+            const types = [...new Set(allSpots.map(s => s.類型).filter(Boolean))].sort();
+
+            buildFilterPanel('filterCityPanel', cities, '縣市');
+            buildFilterPanel('filterAreaPanel', areas, '區域');
+            buildFilterPanel('filterTypePanel', types, '類型');
+        }
+
+        function buildFilterPanel(panelId, options, filterKey) {
+            const panel = document.getElementById(panelId);
+            panel.innerHTML = '';
+            options.forEach(opt => {
+                const label = document.createElement('label');
+                label.className = "flex items-center gap-2 px-2 py-1.5 rounded-lg cursor-pointer text-xs font-bold hover:bg-gray-50";
+                label.style.color = '#264653';
+                label.innerHTML = `
+                    <input type="checkbox" value="${opt}" class="rounded" style="accent-color:#2A9D8F;">
+                    <span>${opt}</span>
+                `;
+                const checkbox = label.querySelector('input');
+                checkbox.addEventListener('change', () => {
+                    if (checkbox.checked) activeFilters[filterKey].add(opt);
+                    else activeFilters[filterKey].delete(opt);
+                    updateFilterButtonLabel(filterKey);
+                    renderSpots();
+                });
+                panel.appendChild(label);
+            });
+        }
+
+        function updateFilterButtonLabel(filterKey) {
+            const map = { 縣市: 'filterCityBtn', 區域: 'filterAreaBtn', 類型: 'filterTypeBtn' };
+            const btn = document.getElementById(map[filterKey]);
+            const selected = [...activeFilters[filterKey]];
+            btn.innerText = selected.length === 0 ? '全部' : selected.join('、');
+        }
+
+        // 下拉面板開關
+        function setupDropdown(btnId, panelId) {
+            const btn = document.getElementById(btnId);
+            const panel = document.getElementById(panelId);
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                document.querySelectorAll('[id$="Panel"]').forEach(p => { if (p !== panel) p.classList.add('hidden'); });
+                panel.classList.toggle('hidden');
+            });
+        }
+        setupDropdown('filterCityBtn', 'filterCityPanel');
+        setupDropdown('filterAreaBtn', 'filterAreaPanel');
+        setupDropdown('filterTypeBtn', 'filterTypePanel');
+        document.addEventListener('click', () => {
+            document.querySelectorAll('[id$="Panel"]').forEach(p => p.classList.add('hidden'));
+        });
+
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            searchKeyword = e.target.value.trim().toLowerCase();
+            renderSpots();
+        });
+
+        document.getElementById('btnClearFilter').addEventListener('click', () => {
+            activeFilters = { 縣市: new Set(), 區域: new Set(), 類型: new Set() };
+            searchKeyword = '';
+            document.getElementById('searchInput').value = '';
+            document.querySelectorAll('#filterCityPanel input, #filterAreaPanel input, #filterTypePanel input').forEach(cb => cb.checked = false);
+            updateFilterButtonLabel('縣市');
+            updateFilterButtonLabel('區域');
+            updateFilterButtonLabel('類型');
+            renderSpots();
+        });
+
+        // =========================================================================
+        // 過濾 + 排序 + 渲染
+        // =========================================================================
+        function getFilteredSpots() {
+            return allSpots.filter(spot => {
+                if (activeFilters.縣市.size > 0 && !activeFilters.縣市.has(spot.縣市)) return false;
+                if (activeFilters.區域.size > 0 && !activeFilters.區域.has(spot.區域)) return false;
+                if (activeFilters.類型.size > 0 && !activeFilters.類型.has(spot.類型)) return false;
+
+                if (searchKeyword) {
+                    const nameMatch = (spot.名稱 || '').toLowerCase().includes(searchKeyword);
+                    const keywordMatch = (spot.關鍵字 || []).some(k => k.toLowerCase().includes(searchKeyword));
+                    if (!nameMatch && !keywordMatch) return false;
+                }
+                return true;
+            }).sort((a, b) => new Date(b.建立日 || 0) - new Date(a.建立日 || 0));
+        }
+
+        function renderSpots() {
+            const grid = document.getElementById('spotGrid');
+            const emptyState = document.getElementById('emptyState');
+            const filtered = getFilteredSpots();
+
+            document.getElementById('resultCount').innerText = `共 ${filtered.length} 個地點`;
+
+            grid.innerHTML = '';
+
+            if (filtered.length === 0) {
+                grid.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                const isFiltering = searchKeyword || activeFilters.縣市.size || activeFilters.區域.size || activeFilters.類型.size;
+                emptyState.querySelector('p.font-black').innerText = isFiltering ? '找不到符合條件的地點' : '目前沒有待訪地點';
+                emptyState.querySelector('p.font-bold').innerText = isFiltering ? '試試調整篩選條件或搜尋字詞' : '群組裡丟新連結，這裡就會出現';
+                return;
+            }
+
+            grid.classList.remove('hidden');
+            emptyState.classList.add('hidden');
+
+            filtered.forEach(spot => {
+                const card = document.createElement('div');
+                card.className = "rounded-2xl p-4 shadow-sm flex flex-col gap-2 animate-fadeIn";
+                card.style.cssText = "background:#fff; border:1px solid #CFE3DD;";
+                card.id = `spot-${spot.page_id}`;
+
+                const typeColor = spot.類型 === '美食' ? { bg: '#FFF1E6', text: '#C2620B' } : { bg: '#E6F4F1', text: '#1F7A68' };
+                const keywordHtml = (spot.關鍵字 || []).slice(0, 3).map(k =>
+                    `<span class="text-xs font-bold px-2 py-0.5 rounded-full" style="background:#EFF6F4; color:#5A7D75;">${k}</span>`
+                ).join('');
+
+                card.innerHTML = `
+                    <div class="flex items-start justify-between gap-2">
+                        <h3 class="font-black text-base leading-snug" style="color:#264653;">${spot.名稱 || '未命名地點'}</h3>
+                        <span class="text-xs font-black px-2 py-0.5 rounded-full whitespace-nowrap" style="background:${typeColor.bg}; color:${typeColor.text};">${spot.類型 || ''}</span>
+                    </div>
+                    <p class="text-xs font-bold" style="color:#5A7D75;">📍 ${spot.縣市 || ''}${spot.區域 || ''}</p>
+                    ${spot.費用參考範圍 ? `<p class="text-xs font-bold" style="color:#5A7D75;">💰 ${spot.費用參考範圍}</p>` : ''}
+                    ${spot.描述 ? `<p class="text-xs leading-relaxed" style="color:#264653;">${spot.描述}</p>` : ''}
+                    <div class="flex flex-wrap gap-1.5">${keywordHtml}</div>
+                    <div class="flex items-center gap-2 pt-2 mt-auto" style="border-top:1px solid #EFF6F4;">
+                        ${spot.來源連結 ? `<a href="${spot.來源連結}" target="_blank" class="flex-1 text-center text-xs font-black py-2 rounded-xl transition" style="background:#EFF6F4; color:#264653;">查看來源</a>` : '<div class="flex-1"></div>'}
+                        <button onclick="markVisited('${spot.page_id}')" class="flex-1 text-center text-xs font-black py-2 rounded-xl transition text-white" style="background:#2A9D8F; border:none;">✓ 標記去過</button>
+                    </div>
+                    <p class="text-xs text-right" style="color:#B6C9C3;">由 ${spot.提供者 || '匿名'} 貢獻</p>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // =========================================================================
+        // 標記去過 MARK_VISITED
+        // =========================================================================
+        async function markVisited(pageId) {
+            const card = document.getElementById(`spot-${pageId}`);
+            try {
+                const res = await fetch(N8N_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': 'true' },
+                    body: JSON.stringify({ action: 'MARK_VISITED', page_id: pageId })
+                });
+                if (!res.ok) throw new Error('更新失敗');
+                const result = await res.json();
+                if (!result.success) throw new Error('更新失敗');
+
+                if (card) {
+                    card.classList.add('animate-popOut');
+                    setTimeout(() => {
+                        allSpots = allSpots.filter(s => s.page_id !== pageId);
+                        renderSpots();
+                    }, 280);
+                }
+            } catch (err) {
+                console.error(err);
+                showAlert("標記去過失敗，請稍後再試一次。", "更新失敗", "❌", "error");
+            }
+        }
+        window.markVisited = markVisited;
+    </script>
 </body>
 </html>
