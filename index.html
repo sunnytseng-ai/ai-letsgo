@@ -40,10 +40,10 @@
             <span id="alertIcon">⚠️</span>
         </div>
         <div class="space-y-1">
-            <h3 id="alertTitle" class="text-base font-black tracking-wider" style="color:#264653;">系統提示</h3>
-            <p id="alertMessage" class="leading-relaxed whitespace-pre-line" style="color:#5A7D75; font-size:14px;"></p>
+            <h3 id="alertTitle" class="text-lg font-black tracking-wider" style="color:#264653;">系統提示</h3>
+            <p id="alertMessage" class="leading-relaxed whitespace-pre-line" style="color:#5A7D75; font-size:16px;"></p>
         </div>
-        <button onclick="closeAlert()" id="alertConfirmBtn" class="w-full font-bold py-2.5 px-4 rounded-xl text-sm tracking-wider transition duration-200 shadow" style="background:#264653; color:#fff; border:none;">
+        <button onclick="closeAlert()" id="alertConfirmBtn" class="w-full font-bold py-2.5 px-4 rounded-xl text-base tracking-wider transition duration-200 shadow" style="background:#264653; color:#fff; border:none;">
             確認
         </button>
     </div>
@@ -51,60 +51,60 @@
     <!-- Splash Screen -->
     <div id="splashScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center space-y-3" style="background-color:#EFF6F4;">
         <div class="loading-spinner"></div>
-        <p class="text-xs font-semibold tracking-widest animate-pulse" style="color:#26465399;">正在準備待訪清單</p>
+        <p class="text-sm font-semibold tracking-widest animate-pulse" style="color:#26465399;">正在準備待訪清單</p>
     </div>
 
     <div id="appLayout" class="w-full max-w-5xl mx-auto">
 
         <header class="text-center pt-2 pb-4">
             <h1 class="text-2xl font-black tracking-wider" style="color:#264653;">走吧！待訪清單</h1>
-            <p id="headerSubtitle" class="text-sm font-bold mt-1" style="color:#5A7D75;">還沒去過的地方，挑一個出發吧</p>
+            <p id="headerSubtitle" class="text-base font-bold mt-1" style="color:#5A7D75;">還沒去過的地方，挑一個出發吧</p>
         </header>
 
         <!-- 狀態切換（單選：未去過／已去過／全部） -->
         <div id="statusTabs" class="flex p-1 rounded-2xl mb-4 gap-1" style="background:#DCEAE6;">
-            <button type="button" class="status-tab flex-1 py-2 rounded-xl text-sm font-black transition" data-status="未去過">未去過</button>
-            <button type="button" class="status-tab flex-1 py-2 rounded-xl text-sm font-black transition" data-status="已去過">已去過</button>
-            <button type="button" class="status-tab flex-1 py-2 rounded-xl text-sm font-black transition" data-status="全部">全部</button>
+            <button type="button" class="status-tab flex-1 py-2 rounded-xl text-base font-black transition" data-status="未去過">未去過</button>
+            <button type="button" class="status-tab flex-1 py-2 rounded-xl text-base font-black transition" data-status="已去過">已去過</button>
+            <button type="button" class="status-tab flex-1 py-2 rounded-xl text-base font-black transition" data-status="全部">全部</button>
         </div>
 
         <!-- 篩選與搜尋區 -->
         <div class="rounded-2xl p-4 mb-4 shadow-sm space-y-3" style="background:#fff; border:1px solid #CFE3DD;">
             <div class="relative">
-                <input type="text" id="searchInput" placeholder="搜尋名稱或關鍵字..." class="w-full rounded-xl py-2.5 pl-10 pr-4 text-sm font-bold focus:outline-none transition" style="background:#EFF6F4; border:1px solid #CFE3DD; color:#264653;">
-                <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-base" style="color:#5A7D75;">🔍</span>
+                <input type="text" id="searchInput" placeholder="搜尋名稱或關鍵字..." class="w-full rounded-xl py-2.5 pl-10 pr-4 text-base font-bold focus:outline-none transition" style="background:#EFF6F4; border:1px solid #CFE3DD; color:#264653;">
+                <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-lg" style="color:#5A7D75;">🔍</span>
             </div>
 
             <div class="grid grid-cols-3 gap-2">
                 <div>
-                    <label class="block text-sm font-black mb-1" style="color:#5A7D75;">縣市</label>
+                    <label class="block text-base font-black mb-1" style="color:#5A7D75;">縣市</label>
                     <div class="relative">
                         <select id="filterCity" multiple class="hidden"></select>
-                        <button type="button" id="filterCityBtn" class="w-full rounded-xl py-2 px-3 text-sm font-bold text-left truncate" style="background:#EFF6F4; border:1px solid #CFE3DD; color:#264653;">全部</button>
+                        <button type="button" id="filterCityBtn" class="w-full rounded-xl py-2 px-3 text-base font-bold text-left truncate" style="background:#EFF6F4; border:1px solid #CFE3DD; color:#264653;">全部</button>
                         <div id="filterCityPanel" class="hidden absolute z-20 mt-1 w-full max-h-48 overflow-y-auto rounded-xl shadow-lg p-2 space-y-1" style="background:#fff; border:1px solid #CFE3DD;"></div>
                     </div>
                 </div>
                 <div>
-                    <label class="block text-sm font-black mb-1" style="color:#5A7D75;">區域</label>
+                    <label class="block text-base font-black mb-1" style="color:#5A7D75;">區域</label>
                     <div class="relative">
                         <select id="filterArea" multiple class="hidden"></select>
-                        <button type="button" id="filterAreaBtn" class="w-full rounded-xl py-2 px-3 text-sm font-bold text-left truncate" style="background:#EFF6F4; border:1px solid #CFE3DD; color:#264653;">全部</button>
+                        <button type="button" id="filterAreaBtn" class="w-full rounded-xl py-2 px-3 text-base font-bold text-left truncate" style="background:#EFF6F4; border:1px solid #CFE3DD; color:#264653;">全部</button>
                         <div id="filterAreaPanel" class="hidden absolute z-20 mt-1 w-full max-h-48 overflow-y-auto rounded-xl shadow-lg p-2 space-y-1" style="background:#fff; border:1px solid #CFE3DD;"></div>
                     </div>
                 </div>
                 <div>
-                    <label class="block text-sm font-black mb-1" style="color:#5A7D75;">類型</label>
+                    <label class="block text-base font-black mb-1" style="color:#5A7D75;">類型</label>
                     <div class="relative">
                         <select id="filterType" multiple class="hidden"></select>
-                        <button type="button" id="filterTypeBtn" class="w-full rounded-xl py-2 px-3 text-sm font-bold text-left truncate" style="background:#EFF6F4; border:1px solid #CFE3DD; color:#264653;">全部</button>
+                        <button type="button" id="filterTypeBtn" class="w-full rounded-xl py-2 px-3 text-base font-bold text-left truncate" style="background:#EFF6F4; border:1px solid #CFE3DD; color:#264653;">全部</button>
                         <div id="filterTypePanel" class="hidden absolute z-20 mt-1 w-full max-h-48 overflow-y-auto rounded-xl shadow-lg p-2 space-y-1" style="background:#fff; border:1px solid #CFE3DD;"></div>
                     </div>
                 </div>
             </div>
 
             <div class="flex items-center justify-between pt-1">
-                <span id="resultCount" class="text-sm font-bold" style="color:#5A7D75;">共 0 個地點</span>
-                <button id="btnClearFilter" class="text-sm font-bold underline" style="color:#2A9D8F;">清除篩選</button>
+                <span id="resultCount" class="text-base font-bold" style="color:#5A7D75;">共 0 個地點</span>
+                <button id="btnClearFilter" class="text-base font-bold underline" style="color:#2A9D8F;">清除篩選</button>
             </div>
         </div>
 
@@ -114,18 +114,18 @@
         <!-- 空白狀態 -->
         <div id="emptyState" class="hidden flex flex-col items-center justify-center text-center py-16 space-y-3">
             <span class="text-5xl">🗺️</span>
-            <p class="font-black text-base" style="color:#264653;"></p>
-            <p class="text-sm font-bold" style="color:#5A7D75;"></p>
+            <p class="font-black text-lg" style="color:#264653;"></p>
+            <p class="text-base font-bold" style="color:#5A7D75;"></p>
         </div>
 
-        <footer class="text-center py-6 text-xs font-bold tracking-wide" style="color:#5A7D75;">
+        <footer class="text-center py-6 text-sm font-bold tracking-wide" style="color:#5A7D75;">
             AI 工具煉成記 • Sunny Tseng
         </footer>
     </div>
 
     <div id="loadingOverlay" class="fixed inset-0 z-50 flex flex-col items-center justify-center space-y-4 hidden" style="background:rgba(239,246,244,0.95);">
         <div class="loading-spinner"></div>
-        <p id="loadingText" class="text-sm font-bold tracking-widest animate-pulse" style="color:#264653;">處理中...</p>
+        <p id="loadingText" class="text-base font-bold tracking-widest animate-pulse" style="color:#264653;">處理中...</p>
     </div>
 
     <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
@@ -167,7 +167,7 @@
             alertMessage.innerText = msg;
 
             alertIconBg.className = "mx-auto w-12 h-12 rounded-full flex items-center justify-center text-2xl";
-            confirmBtn.className = "w-full font-black py-2.5 px-4 rounded-xl text-sm tracking-wider transition duration-200 shadow border";
+            confirmBtn.className = "w-full font-black py-2.5 px-4 rounded-xl text-base tracking-wider transition duration-200 shadow border";
 
             if (type === 'error') {
                 alertBox.style.borderColor = '#fca5a5';
@@ -284,7 +284,7 @@
             panel.innerHTML = '';
             options.forEach(opt => {
                 const label = document.createElement('label');
-                label.className = "flex items-center gap-2 px-2 py-1.5 rounded-lg cursor-pointer text-sm font-bold hover:bg-gray-50";
+                label.className = "flex items-center gap-2 px-2 py-1.5 rounded-lg cursor-pointer text-base font-bold hover:bg-gray-50";
                 label.style.color = '#264653';
                 label.innerHTML = `
                     <input type="checkbox" value="${opt}" class="rounded" style="accent-color:#2A9D8F;">
@@ -416,27 +416,27 @@
 
                 const typeColor = spot.類型 === '美食' ? { bg: '#FFF1E6', text: '#C2620B' } : { bg: '#E6F4F1', text: '#1F7A68' };
                 const keywordHtml = (spot.關鍵字 || []).slice(0, 3).map(k =>
-                    `<span class="text-sm font-bold px-2 py-0.5 rounded-full" style="background:#EFF6F4; color:#5A7D75;">${k}</span>`
+                    `<span class="text-base font-bold px-2 py-0.5 rounded-full" style="background:#EFF6F4; color:#5A7D75;">${k}</span>`
                 ).join('');
 
                 const actionHtml = spot.是否去過
-                    ? `<span class="flex-1 text-center text-sm font-black py-2 rounded-xl" style="background:#E6F4F1; color:#1F7A68;">✓ 已去過</span>`
-                    : `<button onclick="markVisited('${spot.page_id}')" class="flex-1 text-center text-sm font-black py-2 rounded-xl transition text-white" style="background:#2A9D8F; border:none;">✓ 標記去過</button>`;
+                    ? `<span class="flex-1 text-center text-base font-black py-2 rounded-xl" style="background:#E6F4F1; color:#1F7A68;">✓ 已去過</span>`
+                    : `<button onclick="markVisited('${spot.page_id}')" class="flex-1 text-center text-base font-black py-2 rounded-xl transition text-white" style="background:#2A9D8F; border:none;">✓ 標記去過</button>`;
 
                 card.innerHTML = `
                     <div class="flex items-start justify-between gap-2">
-                        <h3 class="font-black text-base leading-snug" style="color:#264653;">${spot.名稱 || '未命名地點'}</h3>
-                        <span class="text-sm font-black px-2 py-0.5 rounded-full whitespace-nowrap" style="background:${typeColor.bg}; color:${typeColor.text};">${spot.類型 || ''}</span>
+                        <h3 class="font-black text-lg leading-snug" style="color:#264653;">${spot.名稱 || '未命名地點'}</h3>
+                        <span class="text-base font-black px-2 py-0.5 rounded-full whitespace-nowrap" style="background:${typeColor.bg}; color:${typeColor.text};">${spot.類型 || ''}</span>
                     </div>
-                    <p class="text-sm font-bold" style="color:#5A7D75;">📍 ${spot.縣市 || ''}${spot.區域 || ''}</p>
-                    ${spot.費用參考範圍 ? `<p class="text-sm font-bold" style="color:#5A7D75;">💰 ${spot.費用參考範圍}</p>` : ''}
-                    ${spot.描述 ? `<p class="text-sm leading-relaxed" style="color:#264653;">${spot.描述}</p>` : ''}
+                    <p class="text-base font-bold" style="color:#5A7D75;">📍 ${spot.縣市 || ''}${spot.區域 || ''}</p>
+                    ${spot.費用參考範圍 ? `<p class="text-base font-bold" style="color:#5A7D75;">💰 ${spot.費用參考範圍}</p>` : ''}
+                    ${spot.描述 ? `<p class="text-base leading-relaxed" style="color:#264653;">${spot.描述}</p>` : ''}
                     <div class="flex flex-wrap gap-1.5">${keywordHtml}</div>
                     <div class="flex items-center gap-2 pt-2 mt-auto" style="border-top:1px solid #EFF6F4;">
-                        ${spot.來源連結 ? `<a href="${spot.來源連結}" target="_blank" class="flex-1 text-center text-sm font-black py-2 rounded-xl transition" style="background:#EFF6F4; color:#264653;">查看來源</a>` : '<div class="flex-1"></div>'}
+                        ${spot.來源連結 ? `<a href="${spot.來源連結}" target="_blank" class="flex-1 text-center text-base font-black py-2 rounded-xl transition" style="background:#EFF6F4; color:#264653;">查看來源</a>` : '<div class="flex-1"></div>'}
                         ${actionHtml}
                     </div>
-                    <p class="text-xs text-right" style="color:#B6C9C3;">由 ${spot.提供者 || '匿名'} 貢獻</p>
+                    <p class="text-sm text-right" style="color:#B6C9C3;">由 ${spot.提供者 || '匿名'} 貢獻</p>
                 `;
                 grid.appendChild(card);
             });
