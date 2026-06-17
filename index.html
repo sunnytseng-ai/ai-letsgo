@@ -58,8 +58,15 @@
 
         <header class="text-center pt-2 pb-4">
             <h1 class="text-2xl font-black tracking-wider" style="color:#264653;">走吧！待訪清單</h1>
-            <p class="text-xs font-bold mt-1" style="color:#5A7D75;">還沒去過的地方，挑一個出發吧</p>
+            <p id="headerSubtitle" class="text-xs font-bold mt-1" style="color:#5A7D75;">還沒去過的地方，挑一個出發吧</p>
         </header>
+
+        <!-- 狀態切換（單選：未去過／已去過／全部） -->
+        <div id="statusTabs" class="flex p-1 rounded-2xl mb-4 gap-1" style="background:#DCEAE6;">
+            <button type="button" class="status-tab flex-1 py-2 rounded-xl text-xs font-black transition" data-status="未去過">未去過</button>
+            <button type="button" class="status-tab flex-1 py-2 rounded-xl text-xs font-black transition" data-status="已去過">已去過</button>
+            <button type="button" class="status-tab flex-1 py-2 rounded-xl text-xs font-black transition" data-status="全部">全部</button>
+        </div>
 
         <!-- 篩選與搜尋區 -->
         <div class="rounded-2xl p-4 mb-4 shadow-sm space-y-3" style="background:#fff; border:1px solid #CFE3DD;">
@@ -129,6 +136,18 @@
         let allSpots = [];
         let activeFilters = { 縣市: new Set(), 區域: new Set(), 類型: new Set() };
         let searchKeyword = '';
+        let activeStatus = '未去過';
+
+        const STATUS_SUBTITLE = {
+            未去過: '還沒去過的地方，挑一個出發吧',
+            已去過: '回顧一下，這些都去過了',
+            全部: '所有收藏的地點，都在這裡'
+        };
+        const STATUS_EMPTY_TEXT = {
+            未去過: { title: '目前沒有待訪地點', desc: '群組裡丟新連結，這裡就會出現' },
+            已去過: { title: '還沒有去過的紀錄', desc: '標記去過後，會顯示在這裡' },
+            全部: { title: '目前還沒有任何景點記錄', desc: '群組裡丟新連結，這裡就會出現' }
+        };
 
         // =========================================================================
         // Alert Modal
@@ -305,6 +324,28 @@
             document.querySelectorAll('[id$="Panel"]').forEach(p => p.classList.add('hidden'));
         });
 
+        // 狀態切換 Tab（未去過／已去過／全部）
+        function setupStatusTabs() {
+            document.querySelectorAll('.status-tab').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    activeStatus = btn.dataset.status;
+                    updateStatusTabVisuals();
+                    document.getElementById('headerSubtitle').innerText = STATUS_SUBTITLE[activeStatus];
+                    renderSpots();
+                });
+            });
+            updateStatusTabVisuals();
+        }
+
+        function updateStatusTabVisuals() {
+            document.querySelectorAll('.status-tab').forEach(btn => {
+                const isActive = btn.dataset.status === activeStatus;
+                btn.style.background = isActive ? '#2A9D8F' : 'transparent';
+                btn.style.color = isActive ? '#fff' : '#5A7D75';
+            });
+        }
+        setupStatusTabs();
+
         document.getElementById('searchInput').addEventListener('input', (e) => {
             searchKeyword = e.target.value.trim().toLowerCase();
             renderSpots();
@@ -326,6 +367,9 @@
         // =========================================================================
         function getFilteredSpots() {
             return allSpots.filter(spot => {
+                if (activeStatus === '未去過' && spot.是否去過) return false;
+                if (activeStatus === '已去過' && !spot.是否去過) return false;
+
                 if (activeFilters.縣市.size > 0 && !activeFilters.縣市.has(spot.縣市)) return false;
                 if (activeFilters.區域.size > 0 && !activeFilters.區域.has(spot.區域)) return false;
                 if (activeFilters.類型.size > 0 && !activeFilters.類型.has(spot.類型)) return false;
@@ -352,8 +396,11 @@
                 grid.classList.add('hidden');
                 emptyState.classList.remove('hidden');
                 const isFiltering = searchKeyword || activeFilters.縣市.size || activeFilters.區域.size || activeFilters.類型.size;
-                emptyState.querySelector('p.font-black').innerText = isFiltering ? '找不到符合條件的地點' : '目前沒有待訪地點';
-                emptyState.querySelector('p.font-bold').innerText = isFiltering ? '試試調整篩選條件或搜尋字詞' : '群組裡丟新連結，這裡就會出現';
+                const emptyText = isFiltering
+                    ? { title: '找不到符合條件的地點', desc: '試試調整篩選條件或搜尋字詞' }
+                    : STATUS_EMPTY_TEXT[activeStatus];
+                emptyState.querySelector('p.font-black').innerText = emptyText.title;
+                emptyState.querySelector('p.font-bold').innerText = emptyText.desc;
                 return;
             }
 
@@ -371,6 +418,10 @@
                     `<span class="text-xs font-bold px-2 py-0.5 rounded-full" style="background:#EFF6F4; color:#5A7D75;">${k}</span>`
                 ).join('');
 
+                const actionHtml = spot.是否去過
+                    ? `<span class="flex-1 text-center text-xs font-black py-2 rounded-xl" style="background:#E6F4F1; color:#1F7A68;">✓ 已去過</span>`
+                    : `<button onclick="markVisited('${spot.page_id}')" class="flex-1 text-center text-xs font-black py-2 rounded-xl transition text-white" style="background:#2A9D8F; border:none;">✓ 標記去過</button>`;
+
                 card.innerHTML = `
                     <div class="flex items-start justify-between gap-2">
                         <h3 class="font-black text-base leading-snug" style="color:#264653;">${spot.名稱 || '未命名地點'}</h3>
@@ -382,7 +433,7 @@
                     <div class="flex flex-wrap gap-1.5">${keywordHtml}</div>
                     <div class="flex items-center gap-2 pt-2 mt-auto" style="border-top:1px solid #EFF6F4;">
                         ${spot.來源連結 ? `<a href="${spot.來源連結}" target="_blank" class="flex-1 text-center text-xs font-black py-2 rounded-xl transition" style="background:#EFF6F4; color:#264653;">查看來源</a>` : '<div class="flex-1"></div>'}
-                        <button onclick="markVisited('${spot.page_id}')" class="flex-1 text-center text-xs font-black py-2 rounded-xl transition text-white" style="background:#2A9D8F; border:none;">✓ 標記去過</button>
+                        ${actionHtml}
                     </div>
                     <p class="text-xs text-right" style="color:#B6C9C3;">由 ${spot.提供者 || '匿名'} 貢獻</p>
                 `;
@@ -408,7 +459,8 @@
                 if (card) {
                     card.classList.add('animate-popOut');
                     setTimeout(() => {
-                        allSpots = allSpots.filter(s => s.page_id !== pageId);
+                        const spot = allSpots.find(s => s.page_id === pageId);
+                        if (spot) spot.是否去過 = true;
                         renderSpots();
                     }, 280);
                 }
