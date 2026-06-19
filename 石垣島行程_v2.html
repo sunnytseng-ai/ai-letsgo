@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>石垣島 4天3夜行程 v2｜2026.7.7–7.10</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
+
+  :root {
+    --ocean: #1B5E8A;
+    --ocean-light: #2E7AB8;
+    --ocean-pale: #E8F4FD;
+    --coral: #E05A2B;
+    --coral-light: #F2784B;
+    --sand: #F7F2E8;
+    --sand-dark: #EDE4D0;
+    --white: #FFFFFF;
+    --text: #2C2C2C;
+    --text-muted: #666666;
+    --border: #D4C9B0;
+    --warn: #F59E0B;
+    --warn-bg: #FFFBEB;
+    --green: #2E7D52;
+    --green-bg: #EDFAF2;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--sand);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ── HEADER ── */
+  .hero {
+    background: linear-gradient(160deg, var(--ocean) 0%, #0D3A5C 100%);
+    color: white;
+    padding: 32px 20px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    bottom: -1px; left: 0; right: 0;
+    height: 28px;
+    background: var(--sand);
+    border-radius: 28px 28px 0 0;
+  }
+  .hero-wave {
+    position: absolute;
+    top: 0; right: -20px;
+    opacity: 0.07;
+    font-size: 180px;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+  .hero h1 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    margin-bottom: 6px;
+  }
+  .hero .subtitle {
+    font-size: 13px;
+    opacity: 0.82;
+    margin-bottom: 16px;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .hero-badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  /* ── NAV TABS ── */
+  .nav-wrap {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--white);
+    border-bottom: 2px solid var(--border);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .nav-wrap::-webkit-scrollbar { display: none; }
+  .nav-tabs {
+    display: flex;
+    min-width: max-content;
+    padding: 0 12px;
+  }
+  .nav-tab {
+    padding: 12px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .nav-tab.active {
+    color: var(--ocean);
+    border-bottom-color: var(--ocean);
+  }
+
+  /* ── CONTENT ── */
+  .content {
+    padding: 0 16px 60px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .section { display: none; padding-top: 20px; }
+  .section.active { display: block; }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 14px;
+    border: 1px solid var(--border);
+  }
+  .card-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ocean);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ── INFO TABLE ── */
+  .info-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .info-table tr { border-bottom: 1px solid var(--sand-dark); }
+  .info-table tr:last-child { border-bottom: none; }
+  .info-table td { padding: 8px 4px; vertical-align: top; }
+  .info-table td:first-child {
+    color: var(--text-muted);
+    white-space: nowrap;
+    padding-right: 12px;
+    font-weight: 500;
+    width: 72px;
+  }
+
+  /* ── ALERT ── */
+  .alert {
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    font-size: 13px;
+    margin-bottom: 12px;
+    line-height: 1.6;
+  }
+  .alert-warn { background: var(--warn-bg); border-left: 3px solid var(--warn); }
+  .alert-info { background: var(--ocean-pale); border-left: 3px solid var(--ocean-light); }
+  .alert-good { background: var(--green-bg); border-left: 3px solid var(--green); }
+  .alert strong { font-weight: 700; }
+
+  /* ── TIMELINE ── */
+  .timeline { list-style: none; }
+  .tl-item {
+    display: grid;
+    grid-template-columns: 68px 1fr;
+    gap: 0 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--sand-dark);
+    position: relative;
+  }
+  .tl-item:last-child { border-bottom: none; }
+  .tl-time {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ocean);
+    padding-top: 2px;
+    line-height: 1.4;
+  }
+  .tl-time.key { color: var(--coral); }
+  .tl-body { font-size: 13.5px; }
+  .tl-main { font-weight: 600; margin-bottom: 2px; }
+  .tl-note { font-size: 12px; color: var(--text-muted); }
+  .tl-tag {
+    display: inline-block;
+    background: var(--ocean-pale);
+    color: var(--ocean);
+    border-radius: 4px;
+    padding: 0 6px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+  .tl-tag.warn { background: var(--warn-bg); color: #B45309; }
+
+  /* ── TRANSPORT TABLE ── */
+  .transport-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    margin-top: 4px;
+  }
+  .transport-table th {
+    background: var(--ocean);
+    color: white;
+    padding: 7px 8px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+  }
+  .transport-table td {
+    padding: 7px 8px;
+    border-bottom: 1px solid var(--sand-dark);
+    vertical-align: top;
+  }
+  .transport-table tr:nth-child(even) td { background: var(--sand); }
+  .transport-table tr:last-child td { border-bottom: none; }
+
+  /* ── SPOT CARD ── */
+  .spot {
+    border-left: 3px solid var(--ocean-light);
+    padding: 10px 12px;
+    background: var(--sand);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin-bottom: 10px;
+    font-size: 13.5px;
+  }
+  .spot-name {
+    font-weight: 700;
+    color: var(--ocean);
+    margin-bottom: 4px;
+    font-size: 14px;
+  }
+  .spot-detail { color: var(--text-muted); font-size: 12.5px; line-height: 1.6; }
+  .spot-tag {
+    display: inline-block;
+    background: var(--coral);
+    color: white;
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-right: 4px;
+  }
+  .spot-tag.free { background: var(--green); }
+
+  /* ── MEAL ACCORDION ── */
+  .meal-block { margin-bottom: 12px; }
+  .meal-header {
+    background: var(--ocean);
+    color: white;
+    padding: 10px 14px;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .meal-options { border: 1px solid var(--border); border-top: none; border-radius: 0 0 var(--radius-sm) var(--radius-sm); overflow: hidden; }
+  .meal-option {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--sand-dark);
+    font-size: 13px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .meal-option:last-child { border-bottom: none; }
+  .meal-option.first { background: var(--white); }
+  .meal-option.backup { background: var(--sand); }
+  .meal-opt-title {
+    font-weight: 700;
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .meal-opt-badge {
+    font-size: 11px;
+    background: var(--ocean-pale);
+    color: var(--ocean);
+    padding: 1px 7px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  .meal-opt-badge.first { background: #FFF0E8; color: var(--coral); }
+  .meal-detail {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .meal-detail.open { max-height: 200px; }
+  .expand-icon { font-size: 12px; color: var(--text-muted); transition: transform 0.3s; }
+  .expand-icon.rotated { transform: rotate(180deg); }
+
+  /* ── BUS TABLE ── */
+  .bus-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    margin-top: 6px;
+  }
+  .bus-table th {
+    background: var(--ocean);
+    color: white;
+    padding: 7px 8px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+  }
+  .bus-table td {
+    padding: 7px 8px;
+    text-align: center;
+    border-bottom: 1px solid var(--sand-dark);
+  }
+  .bus-table tr:last-child td { border-bottom: none; }
+  .bus-table tr.highlight td { background: #FFF0E8; font-weight: 700; color: var(--coral); }
+  .bus-table tr:nth-child(even):not(.highlight) td { background: var(--sand); }
+
+  /* ── RETURN COMPARE ── */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .compare-card {
+    border-radius: var(--radius-sm);
+    padding: 14px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .compare-card.bus { background: var(--ocean-pale); border-color: var(--ocean-light); }
+  .compare-card.taxi { background: #FFF0E8; border-color: var(--coral); }
+  .compare-title { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+  .compare-row { font-size: 12px; color: var(--text-muted); padding: 3px 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .compare-row:last-child { border-bottom: none; }
+  .compare-row span { float: right; font-weight: 600; color: var(--text); }
+
+  /* ── CHECKLIST ── */
+  .checklist { list-style: none; }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--sand-dark);
+    font-size: 13.5px;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .check-box {
+    width: 20px; height: 20px;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .check-box.checked { background: var(--green); border-color: var(--green); }
+  .check-box.checked::after { content: '✓'; color: white; font-size: 12px; font-weight: 700; }
+  .checklist li.done .check-text { text-decoration: line-through; color: var(--text-muted); }
+
+  /* ── LUGGAGE ── */
+  .luggage-plan {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .luggage-head {
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .luggage-head.main { background: var(--ocean); color: white; }
+  .luggage-head.backup { background: var(--sand-dark); color: var(--text); }
+  .luggage-body { padding: 10px 14px; font-size: 13px; background: var(--white); }
+  .luggage-body li { padding: 3px 0; color: var(--text-muted); font-size: 12.5px; }
+  .luggage-body li strong { color: var(--text); }
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ocean);
+    padding: 6px 0 10px;
+    border-bottom: 2px solid var(--ocean-pale);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ── DAY LABEL ── */
+  .day-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    background: linear-gradient(135deg, var(--ocean) 0%, var(--ocean-light) 100%);
+    color: white;
+  }
+  .day-label.coral { background: linear-gradient(135deg, #C0482A 0%, var(--coral) 100%); }
+  .day-label.teal { background: linear-gradient(135deg, #1A6B5A 0%, #2E9E87 100%); }
+  .day-label.purple { background: linear-gradient(135deg, #5B3A8A 0%, #7E57C2 100%); }
+  .day-num { font-size: 26px; font-weight: 700; opacity: 0.9; line-height: 1; }
+  .day-info { flex: 1; }
+  .day-date { font-size: 12px; opacity: 0.85; }
+  .day-theme { font-size: 14px; font-weight: 600; }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+    color: var(--text-muted);
+    background: var(--white);
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 400px) {
+    .compare-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 19px; }
+  }
+
+  /* Map styles */
+  #trip-map { height: 420px; width: 100%; }
+  #map-container { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; margin-bottom: 14px; }
+  .map-legend { padding: 10px 16px; border-top: 1px solid var(--sand-dark); }
+  .legend-title { font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; }
+  .legend-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text-muted); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .day-filter { display: flex; gap: 6px; padding: 10px 16px; border-bottom: 1px solid var(--sand-dark); flex-wrap: wrap; }
+  .day-btn {
+    padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;
+    cursor: pointer; border: 2px solid transparent; transition: all 0.2s;
+    user-select: none; -webkit-tap-highlight-color: transparent;
+  }
+  .day-btn[data-day="all"].active { background:#2C2C2C; color:white; }
+  .day-btn[data-day="1"].active { background:#1B5E8A; color:white; }
+  .day-btn[data-day="2"].active { background:#1A6B5A; color:white; }
+  .day-btn[data-day="3"].active { background:#C0482A; color:white; }
+  .day-btn:not(.active) { background: var(--sand); color: var(--text-muted); border-color: var(--border); }
+</style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-wave">🏝</div>
+  <h1>🗾 石垣島 4天3夜</h1>
+  <div class="subtitle">2026年7月7日（二）— 7月10日（五）　草案 v2</div>
+  <div class="hero-meta">
+    <span class="hero-badge">✈ IT736 / IT737</span>
+    <span class="hero-badge">👥 4大人</span>
+    <span class="hero-badge">🚗 ORIX 租車</span>
+    <span class="hero-badge">🏨 KARCHIBE</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <div class="nav-tabs">
+    <div class="nav-tab active" onclick="showTab('info')">基本資訊</div>
+    <div class="nav-tab" onclick="showTab('day1')">Day 1</div>
+    <div class="nav-tab" onclick="showTab('day2')">Day 2</div>
+    <div class="nav-tab" onclick="showTab('day3')">Day 3</div>
+    <div class="nav-tab" onclick="showTab('day4')">Day 4 回程</div>
+    <div class="nav-tab" onclick="showTab('bus')">公車攻略</div>
+    <div class="nav-tab" onclick="showTab('prep')">行前準備</div>
+    <div class="nav-tab" onclick="showTab('map')">🗺 地圖</div>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ══════════════ 基本資訊 ══════════════ -->
+<div id="section-info" class="section active">
+
+  <div class="section-title">✈ 航班 & 住宿</div>
+  <div class="card">
+    <table class="info-table">
+      <tr><td>去程</td><td>IT736　桃園 06:35 → 新石垣 08:35</td></tr>
+      <tr><td>回程</td><td>IT737　新石垣 09:25 → 桃園 09:35</td></tr>
+      <tr><td>住宿</td><td>KARCHIBE ISHIGAKI（石垣市大濱386-2）<br><small style="color:var(--text-muted)">Check-in 7/7 16:00起　Check-out 7/10 11:00前<br>⚠ 無人式飯店（セルフチェックイン）</small></td></tr>
+      <tr><td>租車</td><td>ORIX 石垣島店（東野城655-3）<br><small style="color:var(--text-muted)">取車 7/7 14:00　還車 7/9 14:00<br>預約號碼：W7906720</small></td></tr>
+      <tr><td>天氣</td><td>平均 29°C，晴天率高，UV 是東京 5 倍<br><small style="color:var(--text-muted)">7–9月颱風季，請備妥旅遊不便險</small></td></tr>
+    </table>
+  </div>
+
+  <div class="alert alert-warn">
+    <strong>⚠ 7月旺季入境耗時提醒</strong><br>
+    多國班機同時落地，入境通關估計需 38–68 分鐘。<br>
+    08:35 落地，最早 09:13、最晚 09:43 出機場。<br>
+    <strong>Day 1 以 09:55 班次為首選、10:55 為備案。</strong>
+  </div>
+
+  <div class="section-title">🧳 行李處理方式</div>
+  <div class="alert alert-warn" style="margin-bottom:10px">
+    <strong>⚠ 飯店無人看管</strong><br>
+    KARCHIBE ISHIGAKI 為無人式飯店，現場無人員常駐，不適合在飯店門口等候寄放行李。<br>
+    策略：<strong>Day 1 行李存放於機場，取車後開車回機場領取。</strong>
+  </div>
+
+  <div class="luggage-plan">
+    <div class="luggage-head main">✅ 主方案｜RedCaps 機場一時預かり</div>
+    <div class="luggage-body">
+      <ul style="padding-left:16px; list-style:disc;">
+        <li><strong>位置：</strong>新石垣空港 1F 中央</li>
+        <li><strong>申辦：</strong>現場當日受理，無需預約</li>
+        <li><strong>時間：</strong>07:30–21:00</li>
+        <li><strong>費用：</strong>一般行李箱 ¥1,000/件/日（約215元）｜大型 ¥1,500/件/日</li>
+        <li><strong>⚠ 支付：</strong>僅限無現金（信用卡 / IC 感應 / QR / Alipay）<strong>不收現金</strong></li>
+      </ul>
+      <div class="alert alert-info" style="margin-top:10px; font-size:12px;">
+        取車後：駕駛 + 1名團員開車回機場（約15分）領取行李，返回飯店 Check-in。
+      </div>
+    </div>
+  </div>
+
+  <div class="luggage-plan">
+    <div class="luggage-head backup">📌 備案 A｜市區 RedCaps 無人カウンター</div>
+    <div class="luggage-body">
+      <ul style="padding-left:16px; list-style:disc;">
+        <li><strong>位置：</strong>ユーグレナ石垣港離島ターミナル</li>
+        <li><strong>申辦：</strong>無人操作，現場辦理</li>
+        <li><strong>時間：</strong>09:00–18:00（夏季限定）</li>
+        <li><strong>費用：</strong>¥1,000/件/日（同機場）</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="luggage-plan">
+    <div class="luggage-head backup">📌 備案 B｜機場コインロッカー</div>
+    <div class="luggage-body">
+      <ul style="padding-left:16px; list-style:disc;">
+        <li><strong>位置：</strong>1F 展望台電梯附近</li>
+        <li>數量約 20 個，大件行李可能放不進去</li>
+        <li>⚠ 旺季時段容易滿，需盡快下機搶先寄放</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title">🚌 飯店最近公車站</div>
+  <div class="card">
+    <table class="info-table">
+      <tr><td>最近站</td><td><strong>磯辺（いそべ）</strong>　步行約 4 分鐘（318m）<br><small style="color:var(--text-muted)">適用 4 號線、10 號線</small></td></tr>
+      <tr><td>次近站</td><td>ドン・キホーテ前　步行約 9 分鐘（704m）</td></tr>
+      <tr><td>Day 4</td><td>回程搭公車從「磯辺」站上車，車程約 25–30 分鐘到機場</td></tr>
+    </table>
+  </div>
+
+</div>
+
+<!-- ══════════════ DAY 1 ══════════════ -->
+<div id="section-day1" class="section">
+
+  <div class="day-label">
+    <div class="day-num">1</div>
+    <div class="day-info">
+      <div class="day-date">7月7日（二）</div>
+      <div class="day-theme">抵達日｜機場 → 市區 → 取車 → 鐘乳洞</div>
+    </div>
+  </div>
+
+  <div class="section-title">🕐 行程時間表</div>
+  <div class="card">
+    <ul class="timeline">
+      <li class="tl-item">
+        <div class="tl-time">08:35</div>
+        <div class="tl-body"><div class="tl-main">✈ IT736 落地</div></div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">08:35<br>─<br>09:50</div>
+        <div class="tl-body">
+          <div class="tl-main">入境通關 & 行李寄存</div>
+          <div class="tl-note">RedCaps 機場櫃台現場當日受理，僅限無現金支付</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time key">09:55</div>
+        <div class="tl-body">
+          <div class="tl-main">搭 4 號線公車 <span class="tl-tag">⭐ 首選班次</span></div>
+          <div class="tl-note">新石垣空港 發車｜若通關特別順利可試搭 08:55 班</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">10:30</div>
+        <div class="tl-body"><div class="tl-main">抵達 バスターミナル（市區）</div></div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">10:30<br>─</div>
+        <div class="tl-body">
+          <div class="tl-main">早午餐（見下方建議）</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time"></div>
+        <div class="tl-body">
+          <div class="tl-main">📍 桃林寺</div>
+          <div class="tl-note">步行 10 分鐘</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time"></div>
+        <div class="tl-body">
+          <div class="tl-main">📍 Euglena Mall ＋ 公設市場</div>
+          <div class="tl-note">逛街、採購日用品、補防曬</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time"></div>
+        <div class="tl-body">
+          <div class="tl-main">📍 南ぬ浜町緑地公園</div>
+          <div class="tl-note">步行 15 分鐘，海濱散步</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time key">14:00</div>
+        <div class="tl-body">
+          <div class="tl-main">ORIX 取車 <span class="tl-tag warn">⚠ 準時</span></div>
+          <div class="tl-note">預約號碼 W7906720</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">取車後</div>
+        <div class="tl-body">
+          <div class="tl-main">駕駛 + 1人回機場取行李</div>
+          <div class="tl-note">自駕約 15 分鐘，RedCaps 取件後返回</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time"></div>
+        <div class="tl-body">
+          <div class="tl-main">📍 ドン・キホーテ（順路採購）</div>
+          <div class="tl-note">防曬、零食、飲料一次補齊</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time key">16:00<br>─16:30</div>
+        <div class="tl-body">
+          <div class="tl-main">飯店 Check-in，整理行李</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">16:30</div>
+        <div class="tl-body"><div class="tl-main">午休避熱</div></div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">17:00<br>─18:30</div>
+        <div class="tl-body">
+          <div class="tl-main">📍 石垣島鐘乳洞</div>
+          <div class="tl-note">自駕 12 分鐘｜傍晚場次涼爽，入場票 ¥1,200/人</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">19:00</div>
+        <div class="tl-body"><div class="tl-main">晚餐（見下方建議）</div></div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section-title">🚌 點到點交通</div>
+  <div class="card" style="overflow-x:auto;">
+    <table class="transport-table">
+      <tr><th>路段</th><th>交通</th><th>時間</th><th>費用/人</th></tr>
+      <tr><td>空港 → バスターミナル</td><td>4號線公車</td><td>約35分</td><td>¥540（115元）</td></tr>
+      <tr><td>バスターミナル → 桃林寺</td><td>步行</td><td>約10分</td><td>免費</td></tr>
+      <tr><td>桃林寺 → Euglena Mall</td><td>步行</td><td>約5分</td><td>免費</td></tr>
+      <tr><td>Mall → 南ぬ浜町緑地公園</td><td>步行</td><td>約15分</td><td>免費</td></tr>
+      <tr><td>緑地公園 → ORIX</td><td>步行/計程車</td><td>步行20分<br>計程車5分</td><td>計程車¥700</td></tr>
+      <tr><td>ORIX → 機場（取行李）</td><td>自駕</td><td>約15分</td><td>—</td></tr>
+      <tr><td>機場 → ドン・キホーテ</td><td>自駕</td><td>約18分</td><td>—</td></tr>
+      <tr><td>ドン・キホーテ → 飯店</td><td>自駕</td><td>約3分</td><td>—</td></tr>
+      <tr><td>飯店 → 鐘乳洞</td><td>自駕</td><td>約12分</td><td>—</td></tr>
+    </table>
+  </div>
+
+  <div class="section-title">📍 景點特色</div>
+
+  <div class="spot">
+    <div class="spot-name">桃林寺</div>
+    <div class="spot-detail">
+      <span class="spot-tag free">免費</span> 06:30–18:00｜步行 20–30 分鐘<br>
+      1614年創建，八重山最古老寺院。山門仁王像為沖繩現存最古木雕，権現堂為國家重要文化財。靜謐琉球風庭院。
+    </div>
+  </div>
+
+  <div class="spot">
+    <div class="spot-name">Euglena Mall ＋ 石垣市公設市場</div>
+    <div class="spot-detail">
+      <span class="spot-tag free">免費入場</span><br>
+      市區唯一有頂蓋廊街，雨天艷陽天均可逛。1F 美食、2F 伴手禮。<br>
+      🛍 必買：黑糖製品、石垣島ちんすこう、泡盛、海鹽零食
+    </div>
+  </div>
+
+  <div class="spot">
+    <div class="spot-name">南ぬ浜町緑地公園</div>
+    <div class="spot-detail">
+      <span class="spot-tag free">免費</span> 07:00–19:30｜步行 30–45 分鐘<br>
+      越過藍色サザンゲートブリッジ抵達的人工填海島，面海視野開闊。公園內有大量親人野貓。7–9月人工海灘開放。市區最近的夕陽觀賞點。
+    </div>
+  </div>
+
+  <div class="spot">
+    <div class="spot-name">石垣島鐘乳洞</div>
+    <div class="spot-detail">
+      <span class="spot-tag">¥1,200/人</span> 09:00–18:30（最後入場18:00）｜飯店車程約12分<br>
+      日本最南端、石垣島最大鐘乳洞，形成於20萬年前。洞內恆溫23°C，夏日避暑首選。<br>
+      👀 必看：彩燈鐘乳石群、水琴窟滴水聲、トトロ鐘乳石
+    </div>
+  </div>
+
+  <div class="section-title">🍽 餐廳建議</div>
+
+  <div class="meal-block">
+    <div class="meal-header">🍳 早午餐（10:30 左右，市區）</div>
+    <div class="meal-options">
+      <div class="meal-option first" onclick="toggleMeal(this)">
+        <div class="meal-opt-title">とうふの比嘉 <span class="meal-opt-badge first">首選</span> <span class="expand-icon">▼</span></div>
+        <div class="meal-detail">60年老店，島豆腐直營。ゆし豆腐セット（大）¥450，ゆし豆腐そば ¥450。<br>💰 ¥450–650/人（97–140元）｜🕐 06:30–15:00（賣完即止）｜✅ 全員可食</div>
+      </div>
+      <div class="meal-option backup" onclick="toggleMeal(this)">
+        <div class="meal-opt-title">のりば食堂 <span class="meal-opt-badge">備案 B</span> <span class="expand-icon">▼</span></div>
+        <div class="meal-detail">全日相同菜單，早上就有八重山そば。八重山そば（小）¥350起。<br>💰 ¥350–700/人（75–150元）｜✅ 全員可食</div>
+      </div>
+      <div class="meal-option backup" onclick="toggleMeal(this)">
+        <div class="meal-opt-title">公設市場 1F <span class="meal-opt-badge">備案 C</span> <span class="expand-icon">▼</span></div>
+        <div class="meal-detail">Euglena Mall 內，邊逛邊吃。軟骨ソーキそば ¥700–900。<br>💰 ¥700–1,000/人（150–215元）｜✅ 全員可食（選豬肉料理）</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="meal-block">
+    <div class="meal-header">🌙 晚餐（19:00 左右，市區）</div>
+    <div class="meal-options">
+      <div class="meal-option first" onclick="toggleMeal(this)">
+        <div class="meal-opt-title">居酒屋ひとし 石敢當店 <span class="meal-opt-badge first">首選</span> <span class="expand-icon">▼</span></div>
+        <div class="meal-detail">石垣島人氣第一！必吃：軟骨ソーキのマース煮（豬）、ウニそうめんちゃんぷる、石垣牛握り ¥380/貫。<br>💰 ¥3,000–4,000/人（645–860元）｜🕐 16:30–23:00<br>⚠ 電話預約幾乎不通，現場登記候位，下午逛街時先去排號！<br>📍 石垣市大川197-1｜✅ 不吃牛：豬肉海鮮品項豐富</div>
+      </div>
+      <div class="meal-option backup" onclick="toggleMeal(this)">
+        <div class="meal-opt-title">Ishigaki Beef MARU <span class="meal-opt-badge">備案 B</span> <span class="expand-icon">▼</span></div>
+        <div class="meal-detail">石垣牛一頭買入，可線上24小時預約，比ひとし更容易訂。<br>💰 ¥3,500–5,000/人（752–1,075元）｜🕐 17:00–23:00<br>⚠ 不吃牛：選擇較少</div>
+      </div>
+      <div class="meal-option backup" onclick="toggleMeal(this)">
+        <div class="meal-opt-title">炭火焼肉やまもと <span class="meal-opt-badge">備案 C</span> <span class="expand-icon">▼</span></div>
+        <div class="meal-detail">石垣島最知名石垣牛，招牌「焼きしゃぶ」入口即化。需提前預約。<br>💰 ¥4,000–6,000/人（860–1,290元）<br>⚠ 以牛為主，有人不吃牛時較不適合</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════ DAY 2 ══════════════ -->
+<div id="section-day2" class="section">
+
+  <div class="day-label teal">
+    <div class="day-num">2</div>
+    <div class="day-info">
+      <div class="day-date">7月8日（三）</div>
+      <div class="day-theme">北部環島｜川平灣 → 米子燒工坊 → 米原海灘 → 玉取崎</div>
+    </div>
+  </div>
+
+  <div class="alert alert-info" style="margin-bottom:14px">
+    全日自駕（縣道 79 號北上路線）｜早出晚歸，正午回飯店午休避熱
+  </div>
+
+  <div class="section-title">🕐 行程順序</div>
+  <div class="card">
+    <ul class="timeline">
+      <li class="tl-item"><div class="tl-time"></div><div class="tl-body"><div class="tl-main">早餐（見下方）</div></div></li>
+      <li class="tl-item"><div class="tl-time"></div><div class="tl-body"><div class="tl-main">出發，自駕往川平方向</div><div class="tl-note">縣道 79 號，車程約 27 分鐘</div></div></li>
+      <li class="tl-item"><div class="tl-time"></div><div class="tl-body"><div class="tl-main">📍 川平観音堂 ＋ 川平湾</div><div class="tl-note">含玻璃船約 2 小時｜同區域步行可達</div></div></li>
+      <li class="tl-item"><div class="tl-time"></div><div class="tl-body"><div class="tl-main">📍 米子燒工坊</div><div class="tl-note">自駕 10 分鐘｜路邊即可看到巨大獅子狗</div></div></li>
+      <li class="tl-item"><div class="tl-time"></div><div class="tl-body"><div class="tl-main">午餐（川平灣周邊，見下方）</div></div></li>
+      <li class="tl-item"><div class="tl-time"></div><div class="tl-body"><div class="tl-main">📍 米原海灘（浮潛）</div><div class="tl-note">自駕 5 分鐘｜下午 UV 高時段注意防曬</div></div></li>
+      <li class="tl-item"><div class="tl-time"></div><div class="tl-body"><div class="tl-main">返回飯店午休避熱</div><div class="tl-note">自駕 30 分鐘</div></div></li>
+      <li class="tl-item"><div class="tl-time"></div><div class="tl-body"><div class="tl-main">出發往玉取崎展望台</div><div class="tl-note">自駕 40 分鐘</div></div></li>
+      <li class="tl-item"><div class="tl-time"></div><div class="tl-body"><div class="tl-main">📍 玉取崎展望台</div><div class="tl-note">傍晚光線最美，停留 30–45 分鐘</div></div></li>
+      <li class="tl-item"><div class="tl-time"></div><div class="tl-body"><div class="tl-main">返回市區晚餐</div><div class="tl-note">自駕 45 分鐘</div></div></li>
+    </ul>
+  </div>
+
+  <div class="section-title">📍 景點特色</div>
+
+  <div class="spot">
+    <div class="spot-name">川平観音堂</div>
+    <div class="spot-detail"><span class="spot-tag free">免費</span> 步行 15–20 分鐘<br>川平灣旁小石造神社，從此處可俯瞰川平灣最完整全景角度，制高點拍照首選。</div>
+  </div>
+
+  <div class="spot">
+    <div class="spot-name">川平湾 Kabira Bay 🚢</div>
+    <div class="spot-detail">
+      <span class="spot-tag">玻璃船 ¥1,300–2,300/人</span><br>
+      米其林三星、日本百景。湛藍海灣散布9座翠綠小島，世界首個成功養殖黑珍珠之地。禁游泳。<br>
+      🚢 玻璃船約30分，可看珊瑚、熱帶魚、大蛤蜊，幸運可遇海龜。<br>
+      ⚠ 6/1後漲價，建議事先網路訂購｜含玻璃船停留 1.5–2 小時<br>
+      🛍 必買：黑珍珠紀念品、サーターアンダギー
+    </div>
+  </div>
+
+  <div class="spot">
+    <div class="spot-name">米子燒工坊 Yoneko Yaki Shisa Farm</div>
+    <div class="spot-detail">
+      <span class="spot-tag free">免費入場</span> 09:00–16:50｜停留 30–45 分鐘<br>
+      廣大戶外農園，數百隻彩色巨大シーサー散布其中，工坊可見陶藝師現場創作。<br>
+      📍 石垣市桴海447-1<br>
+      🛍 必買：手工彩繪獅子狗 ¥500起（約107元），石垣島最有特色的伴手禮
+    </div>
+  </div>
+
+  <div class="spot">
+    <div class="spot-name">米原海灘 Yonehara Beach 🤿</div>
+    <div class="spot-detail">
+      <span class="spot-tag free">免費入場</span> 浮潛裝備租借 ¥800–1,200/套<br>
+      石垣島東北部最豐富的珊瑚礁浮潛海灘，即使淺水區也可見海龜。<br>
+      ⚠ 請穿防曬水母衣｜停留 1.5–2 小時
+    </div>
+  </div>
+
+  <div class="spot">
+    <div class="spot-name">玉取崎展望台</div>
+    <div class="spot-detail">
+      <span class="spot-tag free">免費</span> 24小時開放｜停留 30–45 分鐘<br>
+      360度俯瞰蜿蜒海岸線，夏日扶桑花步道盛開，紅花 × 藍海絕美。傍晚光線最佳。
+    </div>
+  </div>
+
+  <div class="section-title">🍽 餐廳建議</div>
+
+  <div class="meal-block">
+    <div class="meal-header">🍳 早餐</div>
+    <div class="meal-options">
+      <div class="meal-option first" onclick="toggleMeal(this)">
+        <div class="meal-opt-title">A&W 石垣島店 <span class="meal-opt-badge first">首選</span> <span class="expand-icon">▼</span></div>
+        <div class="meal-detail">沖繩限定！美式漢堡 + 卡利根薯條，台灣幾乎吃不到。<br>必點：モーニングバーガーセット ¥600–900、名物ルートビア（根汁啤酒）<br>💰 ¥600–900/人（129–193元）｜✅ 全員可食</div>
+      </div>
+      <div class="meal-option backup" onclick="toggleMeal(this)">
+        <div class="meal-opt-title">便利商店 <span class="meal-opt-badge">備案 B</span> <span class="expand-icon">▼</span></div>
+        <div class="meal-detail">飯店步行2分鐘，沖繩限定三角飯糰快速出發。<br>💰 ¥300–600/人（64–129元）｜✅ 全員可食</div>
+      </div>
+      <div class="meal-option backup" onclick="toggleMeal(this)">
+        <div class="meal-opt-title">ブルーカフェ石垣島 <span class="meal-opt-badge">備案 C</span> <span class="expand-icon">▼</span></div>
+        <div class="meal-detail">附設烘焙坊，現烤麵包；早餐布菲 ¥1,000。<br>💰 ¥500–1,000/人（107–215元）｜✅ 全員可食</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="meal-block">
+    <div class="meal-header">🍱 午餐（川平灣一帶）</div>
+    <div class="meal-options">
+      <div class="meal-option first" onclick="toggleMeal(this)">
+        <div class="meal-opt-title">Cafe Kuina <span class="meal-opt-badge first">首選</span> <span class="expand-icon">▼</span></div>
+        <div class="meal-detail">川平灣周邊人氣咖啡廳，早上7點就開。<br>必點：朝食セット ¥800–1,000｜💰 ¥800–1,200/人（172–258元）<br>🕐 07:00–16:00（週二、三公休）｜📍 石垣市川平926-1｜✅ 全員可食</div>
+      </div>
+      <div class="meal-option backup" onclick="toggleMeal(this)">
+        <div class="meal-opt-title">川平湾周邊小攤 <span class="meal-opt-badge">備案 B</span> <span class="expand-icon">▼</span></div>
+        <div class="meal-detail">サーターアンダギー + 飲料輕食｜💰 ¥400–600/人（86–129元）｜✅ 全員可食</div>
+      </div>
+      <div class="meal-option backup" onclick="toggleMeal(this)">
+        <div class="meal-opt-title">明石食堂 <span class="meal-opt-badge">備案 C</span> <span class="expand-icon">▼</span></div>
+        <div class="meal-detail">北部超人氣蕎麥麵名店，自家製細麵 + 鰹魚豚骨清湯。<br>必點：八重山そば ¥700–900｜⚠ 售完即止，11:30前抵達最保險｜✅ 全員可食</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="meal-block">
+    <div class="meal-header">🌙 晚餐（市區）</div>
+    <div class="meal-options">
+      <div class="meal-option first" onclick="toggleMeal(this)">
+        <div class="meal-opt-title">炭火焼肉やまもと <span class="meal-opt-badge first">首選</span> <span class="expand-icon">▼</span></div>
+        <div class="meal-detail">石垣牛燒肉，招牌「焼きしゃぶ」入口即化。需提前預約。<br>💰 ¥4,000–6,000/人（860–1,290元）｜⚠ 不吃牛：可點豚カルビ，但以牛為主</div>
+      </div>
+      <div class="meal-option backup" onclick="toggleMeal(this)">
+        <div class="meal-opt-title">居酒屋ひとし（Day 1 若未去成） <span class="meal-opt-badge">備案 B</span> <span class="expand-icon">▼</span></div>
+        <div class="meal-detail">同 Day 1 晚餐首選說明</div>
+      </div>
+      <div class="meal-option backup" onclick="toggleMeal(this)">
+        <div class="meal-opt-title">島そば一番地 <span class="meal-opt-badge">備案 C</span> <span class="expand-icon">▼</span></div>
+        <div class="meal-detail">市區人氣蕎麥麵，化學調味料不使用。<br>必點：軟骨ソーキそば ¥800–1,000｜💰 ¥700–1,000/人（150–215元）｜✅ 全員可食</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════ DAY 3 ══════════════ -->
+<div id="section-day3" class="section">
+
+  <div class="day-label coral">
+    <div class="day-num">3</div>
+    <div class="day-info">
+      <div class="day-date">7月9日（四）</div>
+      <div class="day-theme">西部夕陽日｜御神崎 → 還車 → 購物 → 夕陽</div>
+    </div>
+  </div>
+
+  <div class="alert alert-warn" style="margin-bottom:14px">
+    ⚠ 今日 <strong>14:00 需還車</strong>！上午安排西部景點，下午還車後步行或搭公車。
+  </div>
+
+  <div class="section-title">🕐 行程順序</div>
+  <div class="card">
+    <ul class="timeline">
+      <li class="tl-item"><div class="tl-time"></div><div class="tl-body"><div class="tl-main">早餐（見下方）</div></div></li>
+      <li class="tl-item"><div class="tl-time"></div><div class="tl-body"><div class="tl-main">出發，自駕往御神崎</div><div class="tl-note">縣道 87 號西行，約 35 分鐘</div></div></li>
+      <li class="tl-item"><div class="tl-time"></div><div class="tl-body"><div class="tl-main">📍 御神崎燈台</div><div class="tl-note">停留約 60 分鐘</div></div></li>
+      <li class="tl-item"><div class="tl-time"></div><div class="tl-body"><div class="tl-main">沿西海岸慢駛 ＋ 📍 Fusaki 海灘</div><div class="tl-note">自駕 20 分鐘</div></div></li>
+      <li class="tl-item"><div class="tl-time"></div><div class="tl-body"><div class="tl-main">午餐（市區）</div><div class="tl-note">自駕 20 分鐘返回，見下方</div></div></li>
+      <li class="tl-item"><div class="tl-time"></div><div class="tl-body"><div class="tl-main">市區短暫逛街</div></div></li>
+      <li class="tl-item"><div class="tl-time"></div><div class="tl-body"><div class="tl-main">出發前往 ORIX 還車</div><div class="tl-note">自駕約 10 分鐘</div></div></li>
+      <li class="tl-item">
+        <div class="tl-time key">14:00</div>
+        <div class="tl-body">
+          <div class="tl-main">ORIX 還車 <span class="tl-tag warn">⚠ 請準時</span></div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">14:05</div>
+        <div class="tl-body">
+          <div class="tl-main">步行至「八重山新聞社前」站（3分）</div>
+          <div class="tl-note">搭 4 號線往市區｜¥210｜5–10分到バスターミナル</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">14:30<br>─17:30</div>
+        <div class="tl-body"><div class="tl-main">📍 唐吉訶德 ＋ 市區購物</div><div class="tl-note">伴手禮最後掃貨</div></div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">17:30<br>─18:30</div>
+        <div class="tl-body">
+          <div class="tl-main">📍 南ぬ浜町緑地公園（夕陽）</div>
+          <div class="tl-note">步行 15 分鐘｜7月日落約 19:20</div>
+        </div>
+      </li>
+      <li class="tl-item"><div class="tl-time">19:00</div><div class="tl-body"><div class="tl-main">晚餐（見下方）</div></div></li>
+      <li class="tl-item"><div class="tl-time">20:30</div><div class="tl-body"><div class="tl-main">返回飯店，整理行李</div><div class="tl-note">⚠ 明早需早起</div></div></li>
+    </ul>
+  </div>
+
+  <div class="section-title">📍 景點特色</div>
+
+  <div class="spot">
+    <div class="spot-name">御神崎燈台 Oganzaki Lighthouse</div>
+    <div class="spot-detail">
+      <span class="spot-tag free">免費</span> 24小時｜停留 40–60 分鐘<br>
+      石垣島最西端斷崖上的白色燈台，崖邊俯瞰深藍海洋與遠方西表島輪廓。<br>
+      燈台旁設有 1951 年海難慰靈碑，歷史感濃厚。有停車場、廁所、自動販賣機。<br>
+      👀 必看：燈台 × 斷崖 × 藍海構圖、遠眺西表島、崖邊小徑散步
+    </div>
+  </div>
+
+  <div class="spot">
+    <div class="spot-name">Fusaki 海灘（フサキビーチ）</div>
+    <div class="spot-detail">
+      <span class="spot-tag free">免費</span> 停留 20–30 分鐘<br>
+      度假村前的椰子樹海灘，對外開放拍照，南國風情濃厚。
+    </div>
+  </div>
+
+  <div class="section-title">🍽 餐廳建議</div>
+
+  <div class="meal-block">
+    <div class="meal-header">🍳 早餐</div>
+    <div class="meal-options">
+      <div class="meal-option first" onclick="toggleMeal(this)">
+        <div class="meal-opt-title">島そば一番地 / のりば食堂 <span class="meal-opt-badge first">首選</span> <span class="expand-icon">▼</span></div>
+        <div class="meal-detail">市區開早、價格實惠，暖胃出發。<br>💰 ¥350–700/人（75–150元）｜✅ 全員可食</div>
+      </div>
+      <div class="meal-option backup" onclick="toggleMeal(this)">
+        <div class="meal-opt-title">A&W（若 Day 2 沒去成） <span class="meal-opt-badge">備案 B</span> <span class="expand-icon">▼</span></div>
+        <div class="meal-detail">同 Day 2 早餐首選說明</div>
+      </div>
+      <div class="meal-option backup" onclick="toggleMeal(this)">
+        <div class="meal-opt-title">便利商店（快速出發） <span class="meal-opt-badge">備案 C</span> <span class="expand-icon">▼</span></div>
+        <div class="meal-detail">飯店步行2分鐘，快速補給出發｜💰 ¥300–600/人</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="meal-block">
+    <div class="meal-header">🍱 午餐（市區）</div>
+    <div class="meal-options">
+      <div class="meal-option first" onclick="toggleMeal(this)">
+        <div class="meal-opt-title">石垣市公設市場 1F <span class="meal-opt-badge first">首選</span> <span class="expand-icon">▼</span></div>
+        <div class="meal-detail">最後一次在市場吃在地美食。<br>必點：軟骨ソーキそば ¥700–900｜💰 ¥700–1,200/人（150–258元）｜✅ 全員可食</div>
+      </div>
+      <div class="meal-option backup" onclick="toggleMeal(this)">
+        <div class="meal-opt-title">新垣食堂 <span class="meal-opt-badge">備案 B</span> <span class="expand-icon">▼</span></div>
+        <div class="meal-detail">創業50年以上老字號，ソーキそば CP值極高。<br>💰 ¥700–900/人（150–193元）｜✅ 全員可食</div>
+      </div>
+      <div class="meal-option backup" onclick="toggleMeal(this)">
+        <div class="meal-opt-title">Euglena Mall 周邊輕食 <span class="meal-opt-badge">備案 C</span> <span class="expand-icon">▼</span></div>
+        <div class="meal-detail">購物途中隨手解決｜💰 ¥500–1,000/人（107–215元）｜✅ 全員可食</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="meal-block">
+    <div class="meal-header">🌙 晚餐（市區，最後一晚）</div>
+    <div class="meal-options">
+      <div class="meal-option first" onclick="toggleMeal(this)">
+        <div class="meal-opt-title">海鮮居酒屋（美崎町一帶） <span class="meal-opt-badge first">首選</span> <span class="expand-icon">▼</span></div>
+        <div class="meal-detail">最後一晚石垣島海鮮大餐！島魚刺身、海ぶどう、ラフテー（紅燒豬）、泡盛。<br>💰 ¥3,000–4,000/人（645–860元）｜✅ 全員可食</div>
+      </div>
+      <div class="meal-option backup" onclick="toggleMeal(this)">
+        <div class="meal-opt-title">居酒屋ひとし（若前兩晚未去） <span class="meal-opt-badge">備案 B</span> <span class="expand-icon">▼</span></div>
+        <div class="meal-detail">同 Day 1 晚餐首選說明</div>
+      </div>
+      <div class="meal-option backup" onclick="toggleMeal(this)">
+        <div class="meal-opt-title">Ishigaki Beef MARU <span class="meal-opt-badge">備案 C</span> <span class="expand-icon">▼</span></div>
+        <div class="meal-detail">石垣牛一頭買入，可線上預約｜💰 ¥3,500–5,000/人（752–1,075元）</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════ DAY 4 ══════════════ -->
+<div id="section-day4" class="section">
+
+  <div class="day-label purple">
+    <div class="day-num">4</div>
+    <div class="day-info">
+      <div class="day-date">7月10日（五）</div>
+      <div class="day-theme">回程日｜退房 → 機場 → 桃園</div>
+    </div>
+  </div>
+
+  <div class="alert alert-warn">
+    <strong>⚠ IT737 起飛 09:25，建議 08:15 前完成安檢</strong>
+  </div>
+
+  <div class="section-title" style="margin-top:16px">🚌 方案一｜搭公車</div>
+  <div class="card">
+    <ul class="timeline">
+      <li class="tl-item"><div class="tl-time">06:30</div><div class="tl-body"><div class="tl-main">起床，便利商店快速早餐</div></div></li>
+      <li class="tl-item"><div class="tl-time key">07:11</div><div class="tl-body"><div class="tl-main">最晚出飯店（建議班次）</div><div class="tl-note">步行 4 分鐘到「磯辺」站牌</div></div></li>
+      <li class="tl-item"><div class="tl-time key">07:15</div><div class="tl-body"><div class="tl-main">「磯辺」站上車 <span class="tl-tag">⭐ 推薦</span></div><div class="tl-note">バスターミナル 07:00 發班次｜車程約 25–30 分</div></div></li>
+      <li class="tl-item"><div class="tl-time">07:45</div><div class="tl-body"><div class="tl-main">抵達新石垣機場</div></div></li>
+      <li class="tl-item"><div class="tl-time">07:50<br>─09:00</div><div class="tl-body"><div class="tl-main">辦理登機手續、安檢、候機</div></div></li>
+      <li class="tl-item"><div class="tl-time key">09:25</div><div class="tl-body"><div class="tl-main">✈ IT737 起飛</div></div></li>
+    </ul>
+
+    <div style="margin-top:12px; font-size:13px; font-weight:600; color:var(--ocean); margin-bottom:6px">磯辺站 → 機場 適用班次</div>
+    <table class="bus-table">
+      <tr><th>バスターミナル 發</th><th>磯辺 通過</th><th>機場 着</th><th>建議</th></tr>
+      <tr><td>06:30</td><td>06:50</td><td>07:00</td><td>首班車，最安全</td></tr>
+      <tr class="highlight"><td>07:00</td><td>07:20</td><td>07:30</td><td>⭐ 最推薦</td></tr>
+      <tr><td>07:30</td><td>07:50</td><td>08:00</td><td>最晚可用，偏緊</td></tr>
+    </table>
+
+    <div class="alert alert-info" style="margin-top:10px; font-size:12.5px;">
+      費用：磯辺 → 機場 約 ¥430/人（約92元）｜4人合計約 ¥1,720（約370元）<br>
+      ⚠ 磯辺站票價請出發前向東運輸官網確認
+    </div>
+    <div class="alert alert-warn" style="font-size:12.5px;">
+      ⚠ 4人4大件行李在公車上空間有限，班次固定若錯過需改搭計程車
+    </div>
+  </div>
+
+  <div class="section-title">🚕 方案二｜搭計程車</div>
+  <div class="card">
+    <ul class="timeline">
+      <li class="tl-item"><div class="tl-time">07:20</div><div class="tl-body"><div class="tl-main">起床，便利商店快速早餐</div></div></li>
+      <li class="tl-item"><div class="tl-time key">07:40</div><div class="tl-body"><div class="tl-main">最晚出飯店</div></div></li>
+      <li class="tl-item"><div class="tl-time key">07:45</div><div class="tl-body"><div class="tl-main">計程車出發</div><div class="tl-note">前一晚向飯店確認，或 DiDi APP 叫車</div></div></li>
+      <li class="tl-item"><div class="tl-time">08:05</div><div class="tl-body"><div class="tl-main">抵達新石垣機場</div></div></li>
+      <li class="tl-item"><div class="tl-time">08:10<br>─09:00</div><div class="tl-body"><div class="tl-main">辦理登機手續、安檢、候機</div></div></li>
+      <li class="tl-item"><div class="tl-time key">09:25</div><div class="tl-body"><div class="tl-main">✈ IT737 起飛</div></div></li>
+    </ul>
+    <div class="alert alert-info" style="margin-top:10px; font-size:12.5px;">
+      費用：¥2,800–3,600（4人共乘）｜每人約 ¥825–1,025（約177–220元）<br>
+      行李費：原則上不另收，前一晚預約時告知大件行李數量<br>
+      叫車：DiDi APP｜東洋タクシー 0980-82-8181
+    </div>
+  </div>
+
+  <div class="section-title">📊 兩方案比較</div>
+  <div class="compare-grid">
+    <div class="compare-card bus">
+      <div class="compare-title">🚌 公車</div>
+      <div class="compare-row">最晚出飯店 <span>07:11</span></div>
+      <div class="compare-row">上車時間 <span>07:15 磯辺站</span></div>
+      <div class="compare-row">到機場 <span>約 07:50</span></div>
+      <div class="compare-row">每人費用 <span>¥430（92元）</span></div>
+      <div class="compare-row">行李 <span>⚠ 有限</span></div>
+      <div class="compare-row">彈性 <span>❌ 固定班次</span></div>
+    </div>
+    <div class="compare-card taxi">
+      <div class="compare-title">🚕 計程車</div>
+      <div class="compare-row">最晚出飯店 <span>07:40</span></div>
+      <div class="compare-row">上車時間 <span>07:45 飯店</span></div>
+      <div class="compare-row">到機場 <span>約 08:05</span></div>
+      <div class="compare-row">每人費用 <span>¥825–1,025</span></div>
+      <div class="compare-row">行李 <span>✅ 後車廂</span></div>
+      <div class="compare-row">彈性 <span>✅ 自訂時間</span></div>
+    </div>
+  </div>
+  <div class="alert alert-info" style="margin-top:12px; font-size:12.5px;">
+    差額/人：計程車多約 ¥395–595（約85–128元）
+  </div>
+
+</div>
+
+<!-- ══════════════ 公車攻略 ══════════════ -->
+<div id="section-bus" class="section">
+
+  <div class="section-title">🚌 公車搭乘攻略</div>
+
+  <div class="card">
+    <div class="card-title">巴士公司資訊</div>
+    <table class="info-table">
+      <tr><td>公司</td><td>東運輸株式会社（東バス）</td></tr>
+      <tr><td>電話</td><td>0980-87-5423（バスターミナル 08:00–17:00）</td></tr>
+      <tr><td>官網</td><td>azumabus.co.jp</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">搭車方式</div>
+    <ol style="padding-left:18px; font-size:13.5px; line-height:2.2;">
+      <li>從<strong>後門上車</strong></li>
+      <li>取<strong>整理券</strong>（號碼票，入口機器取用）</li>
+      <li>到站從<strong>前門下車</strong>，依整理券號碼付款</li>
+    </ol>
+    <div style="margin-top:10px; font-size:13px; color:var(--text-muted)">
+      <strong style="color:var(--text)">付款方式：</strong>現金（有找零機）、交通系IC卡（PASMO/Suica/ICOCA）、信用卡感應（部分車輛）
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🎫 MICHIKUSA 5日通行證</div>
+    <div style="font-size:13.5px;">
+      大人 <strong>¥2,000</strong>（約台幣430元）｜5日內無限搭乘（觀光バス除外）<br>
+      <span style="color:var(--text-muted); font-size:12.5px;">在巴士總站或上車向司機購買</span>
+    </div>
+  </div>
+
+  <div class="section-title">🗺 重要路線總表</div>
+  <div style="overflow-x:auto;">
+    <table class="transport-table">
+      <tr><th>路線</th><th>方向</th><th>費用/人</th></tr>
+      <tr><td><strong>4號線</strong></td><td>機場 ↔ 市區<br><small>空港→磯辺→かねひで前→バスターミナル</small></td><td>¥540（115元）</td></tr>
+      <tr><td><strong>9號線</strong><br>（川平線）</td><td>市區 → 川平灣<br><small>バスターミナル → 川平公園前（約40分）</small></td><td>¥730（157元）</td></tr>
+      <tr><td><strong>11號線</strong><br>（米原線）</td><td>市區 → 米原方向<br><small>バスターミナル → 米原キャンプ場前（約50分）</small></td><td>—</td></tr>
+      <tr><td><strong>4/10號線</strong></td><td>ORIX附近 → 市區<br><small>八重山新聞社前 → バスターミナル（約5分）</small></td><td>¥210（45元）</td></tr>
+    </table>
+  </div>
+
+  <div class="section-title" style="margin-top:20px">📅 4號線時刻表｜去機場方向</div>
+  <div class="alert alert-info" style="font-size:12px; margin-bottom:10px">
+    ⚠ 為バスターミナル發車時間，磯辺通過約晚10–12分，建議提前5分在站牌等候。
+  </div>
+  <div style="overflow-x:auto;">
+    <table class="bus-table">
+      <tr><th>バスターミナル 發</th><th>磯辺 通過（約）</th><th>新石垣空港 着</th><th>備注</th></tr>
+      <tr><td>06:30</td><td>06:50</td><td>07:00</td><td>首班車</td></tr>
+      <tr class="highlight"><td>07:00</td><td>07:20</td><td>07:30</td><td>⭐ Day4推薦</td></tr>
+      <tr><td>07:30</td><td>07:50</td><td>08:00</td><td>—</td></tr>
+      <tr><td>08:00</td><td>08:20</td><td>08:30</td><td>—</td></tr>
+      <tr><td>08:30</td><td>08:50</td><td>09:00</td><td>—</td></tr>
+      <tr><td>09:00</td><td>09:20</td><td>09:30</td><td>—</td></tr>
+      <tr><td>09:30</td><td>09:50</td><td>10:00</td><td>—</td></tr>
+      <tr><td>10:00</td><td>10:20</td><td>10:30</td><td>—</td></tr>
+      <tr><td colspan="3">以後每30分鐘一班</td><td>末班 21:00 發</td></tr>
+    </table>
+  </div>
+
+  <div class="section-title" style="margin-top:20px">📅 4號線時刻表｜從機場到市區</div>
+  <div style="overflow-x:auto;">
+    <table class="bus-table">
+      <tr><th>新石垣空港 發</th><th>磯辺 通過（約）</th><th>バスターミナル 着</th><th>備注</th></tr>
+      <tr><td>06:55</td><td>07:10</td><td>07:30</td><td>首班車</td></tr>
+      <tr><td>07:45</td><td>08:00</td><td>08:20</td><td>—</td></tr>
+      <tr><td>08:55</td><td>09:10</td><td>09:30</td><td>通關順利時可搭</td></tr>
+      <tr class="highlight"><td>09:55</td><td>10:10</td><td>10:30</td><td>⭐ Day1推薦</td></tr>
+      <tr><td>10:55</td><td>11:10</td><td>11:30</td><td>備案</td></tr>
+      <tr><td>11:55</td><td>12:10</td><td>12:30</td><td>—</td></tr>
+      <tr><td>12:55</td><td>13:10</td><td>13:30</td><td>—</td></tr>
+      <tr><td colspan="3">以後每30–60分鐘一班</td><td>—</td></tr>
+    </table>
+  </div>
+
+</div>
+
+<!-- ══════════════ 行前準備 ══════════════ -->
+<div id="section-prep" class="section">
+
+  <div class="section-title">✅ 行前準備清單</div>
+  <div class="card">
+    <ul class="checklist" id="checklist">
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">購買<strong>旅遊不便險</strong>（7月颱風季必備）</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">川平灣玻璃船<strong>事先網路訂購</strong>（6/1後漲價，早訂省錢）</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">日本 <strong>eSIM 或 Wi-Fi 分享器</strong>（Google Maps 導航必備）</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">備妥<strong>現金</strong>（公車、部分店家僅收現金）</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text"><strong>防曬乳</strong>（UV是東京5倍）、帽子、防曬衣、防蚊液</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text"><strong>水母衣</strong>（米原海灘浮潛建議自備）</span></li>
+      <li onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-text">Day 4 計程車方案：<strong>入住第一天確認叫車方式</strong></span></li>
+    </ul>
+  </div>
+
+  <div class="section-title">📌 注意事項</div>
+  <div class="card">
+    <ul style="list-style:none; font-size:13.5px; line-height:2.2;">
+      <li>🌅 7月石垣島日落時間約 <strong>19:20–19:30</strong></li>
+      <li>🏖 南ぬ浜町人工海灘 2026 年預計 7/1 起開放，行前請至石垣市官網確認</li>
+      <li>🍺 居酒屋ひとし<strong>無法電話預約</strong>，到島後盡早現場登記</li>
+      <li>🏨 飯店為無人式，緊急聯絡：<strong>050-8893-6817</strong></li>
+      <li>🚌 公車班次以東運輸官方時刻表為準，出發前再次確認</li>
+    </ul>
+  </div>
+
+  <div class="section-title">💴 費用粗估（每人）</div>
+  <div class="card" style="overflow-x:auto;">
+    <table class="transport-table">
+      <tr><th>項目</th><th>費用/人</th><th>台幣約當</th></tr>
+      <tr><td>RedCaps 行李寄存（一般箱）</td><td>¥1,000/件/日</td><td>約215元/件</td></tr>
+      <tr><td>公車 機場→市區（Day 1）</td><td>¥540</td><td>約115元</td></tr>
+      <tr><td>石垣島鐘乳洞</td><td>¥1,200</td><td>約258元</td></tr>
+      <tr><td>川平灣玻璃船</td><td>¥1,300–1,800</td><td>約280–387元</td></tr>
+      <tr><td>浮潛裝備租借（米原）</td><td>¥800–1,200</td><td>約172–258元</td></tr>
+      <tr><td>回程公車（方案一）</td><td>約¥430</td><td>約92元</td></tr>
+      <tr><td>回程計程車（方案二）</td><td>¥825–1,025</td><td>約177–220元</td></tr>
+    </table>
+    <div style="font-size:12px; color:var(--text-muted); margin-top:8px;">匯率：¥1 ≒ 台幣 0.215 元（2026年6月參考值）</div>
+  </div>
+
+</div>
+
+</div><!-- /content -->
+
+
+<!-- ══════════════ MAP ══════════════ -->
+<div id="section-map" class="section">
+
+  <div class="section-title">🗺 景點地圖</div>
+
+  <div id="map-container">
+    <div class="day-filter">
+      <button class="day-btn active" data-day="all" onclick="filterMarkers('all',this)">全部</button>
+      <button class="day-btn" data-day="1" onclick="filterMarkers('1',this)">Day 1</button>
+      <button class="day-btn" data-day="2" onclick="filterMarkers('2',this)">Day 2</button>
+      <button class="day-btn" data-day="3" onclick="filterMarkers('3',this)">Day 3</button>
+    </div>
+    <div id="trip-map"></div>
+    <div class="map-legend">
+      <div class="legend-title">圖例</div>
+      <div class="legend-grid">
+        <div class="legend-item"><div class="legend-dot" style="background:#1B5E8A"></div>Day 1 抵達日</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#1A6B5A"></div>Day 2 北部環島</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#C0482A"></div>Day 3 西部夕陽</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#555555"></div>住宿・租車</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-info" style="font-size:12.5px;">
+    📌 點擊地圖標記可查看景點名稱與說明。地圖資料來源：OpenStreetMap（免費，無需 API key）。
+  </div>
+
+</div>
+
+<div class="footer">
+  石垣島 4天3夜行程草案 v2｜2026-06-19<br>
+  資料僅供參考，班次請出發前向東運輸官方確認
+</div>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('section-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleMeal(el) {
+  const detail = el.querySelector('.meal-detail');
+  const icon = el.querySelector('.expand-icon');
+  const isOpen = detail.classList.contains('open');
+  // Close all in same parent
+  el.closest('.meal-options').querySelectorAll('.meal-detail').forEach(d => d.classList.remove('open'));
+  el.closest('.meal-options').querySelectorAll('.expand-icon').forEach(i => i.classList.remove('rotated'));
+  if (!isOpen) {
+    detail.classList.add('open');
+    icon.classList.add('rotated');
+  }
+}
+
+function toggleCheck(li) {
+  const box = li.querySelector('.check-box');
+  box.classList.toggle('checked');
+  li.classList.toggle('done');
+}
+</script>
+
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// ── 景點資料 ──────────────────────────────────────────
+var spots = [
+  // Day 1
+  { day:1, lat:24.3959677, lng:124.2457641, name:"新石垣空港", note:"IT736 08:35 落地", icon:"✈" },
+  { day:1, lat:24.343773, lng:124.155693, name:"桃林寺", note:"1614年創建，八重山最古老寺院｜免費", icon:"⛩" },
+  { day:1, lat:24.3397121, lng:124.1582806, name:"Euglena Mall ＋ 公設市場", note:"有頂蓋廊街，美食 + 伴手禮", icon:"🛍" },
+  { day:1, lat:24.3308829, lng:124.15703, name:"南ぬ浜町緑地公園", note:"海濱公園，野貓聚集，夕陽觀賞點｜免費", icon:"🐱" },
+  { day:1, lat:24.3377698, lng:124.1659486, name:"ORIX 租車店", note:"14:00 取車｜預約號碼 W7906720", icon:"🚗" },
+  { day:1, lat:24.3414496, lng:124.192140, name:"ドン・キホーテ 石垣島店", note:"藥妝、零食、泡盛一站購齊", icon:"🛒" },
+  { day:1, lat:24.341315, lng:124.195989, name:"KARCHIBE ISHIGAKI（住宿）", note:"Check-in 16:00起｜無人式飯店", icon:"🏠" },
+  { day:1, lat:24.3617425, lng:124.1544657, name:"石垣島鐘乳洞", note:"日本最南端鐘乳洞，洞內23°C｜¥1,200/人", icon:"🦇" },
+  // Day 2
+  { day:2, lat:24.461088, lng:124.143023, name:"川平観音堂", note:"川平灣制高點，拍全景最佳位置｜免費", icon:"⛩" },
+  { day:2, lat:24.4510142, lng:124.1437196, name:"川平湾 Kabira Bay", note:"米其林三星！玻璃船 ¥1,300–2,300/人", icon:"🚢" },
+  { day:2, lat:24.4531988, lng:124.1875243, name:"米子燒工坊 Shisa Farm", note:"巨大彩色獅子狗農園｜入場免費", icon:"🦁" },
+  { day:2, lat:24.4530279, lng:124.1856135, name:"米原海灘 Yonehara Beach", note:"最佳浮潛海灘，可見海龜｜免費入場", icon:"🤿" },
+  { day:2, lat:24.4905397, lng:124.2789085, name:"玉取崎展望台", note:"360度海岸線全景，扶桑花步道｜免費", icon:"🌅" },
+  // Day 3
+  { day:3, lat:24.4526189, lng:124.0786008, name:"御神崎燈台", note:"石垣島最西端，夕陽絕景｜免費", icon:"🔆" },
+  { day:3, lat:24.3716091, lng:124.1145055, name:"Fusaki 海灘", note:"椰子樹海灘，對外開放拍照｜免費", icon:"🌴" },
+  // 餐廳
+  { day:1, lat:24.3399947, lng:124.159399, name:"居酒屋ひとし 石敢當店", note:"石垣島人氣第一居酒屋｜¥3,000–4,000/人", icon:"🍺" },
+  // 住宿標記（灰色，全天顯示）
+  { day:0, lat:24.341315, lng:124.195989, name:"🏠 住宿：KARCHIBE", note:"石垣市大濱386-2", icon:"🏠" },
+];
+
+var DAY_COLORS = { 0:'#555555', 1:'#1B5E8A', 2:'#1A6B5A', 3:'#C0482A' };
+var map, markers = [], currentFilter = 'all';
+
+function createIcon(spot) {
+  var color = DAY_COLORS[spot.day] || '#555555';
+  var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="44" viewBox="0 0 36 44">'
+    + '<path d="M18 2C10.3 2 4 8.3 4 16c0 10 14 26 14 26s14-16 14-26C32 8.3 25.7 2 18 2z" fill="' + color + '" stroke="white" stroke-width="1.5"/>'
+    + '<circle cx="18" cy="16" r="9" fill="white" opacity="0.92"/>'
+    + '<text x="18" y="20" text-anchor="middle" font-size="11" font-family="sans-serif">' + spot.icon + '</text>'
+    + '</svg>';
+  return L.divIcon({
+    html: svg,
+    iconSize: [36, 44],
+    iconAnchor: [18, 44],
+    popupAnchor: [0, -44],
+    className: ''
+  });
+}
+
+function initMap() {
+  if (map) return;
+  map = L.map('trip-map').setView([24.40, 124.18], 11);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    maxZoom: 18
+  }).addTo(map);
+
+  spots.forEach(function(spot) {
+    if(spot.day === 0) return; // skip duplicate hotel
+    var m = L.marker([spot.lat, spot.lng], { icon: createIcon(spot) })
+      .bindPopup(
+        '<div style="font-family:sans-serif;min-width:160px">'
+        + '<div style="font-weight:700;font-size:13px;margin-bottom:4px">' + spot.icon + ' ' + spot.name + '</div>'
+        + '<div style="font-size:11px;color:#666;line-height:1.6">' + spot.note + '</div>'
+        + '<div style="margin-top:4px;display:inline-block;background:' + (DAY_COLORS[spot.day]||'#555') + ';color:white;border-radius:10px;padding:1px 8px;font-size:10px;font-weight:700">'
+        + (spot.day === 0 ? '住宿' : 'Day ' + spot.day) + '</div>'
+        + '</div>'
+      )
+      .addTo(map);
+    m._spotDay = spot.day;
+    markers.push(m);
+  });
+
+  // Draw route lines per day
+  var routes = {
+    1: spots.filter(function(s){ return s.day===1; }).map(function(s){ return [s.lat,s.lng]; }),
+    2: spots.filter(function(s){ return s.day===2; }).map(function(s){ return [s.lat,s.lng]; }),
+    3: spots.filter(function(s){ return s.day===3; }).map(function(s){ return [s.lat,s.lng]; }),
+  };
+  Object.keys(routes).forEach(function(d) {
+    if(routes[d].length > 1) {
+      L.polyline(routes[d], {
+        color: DAY_COLORS[parseInt(d)],
+        weight: 2.5,
+        opacity: 0.45,
+        dashArray: '6, 6'
+      }).addTo(map);
+    }
+  });
+}
+
+function filterMarkers(day, btn) {
+  document.querySelectorAll('.day-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  currentFilter = day;
+  markers.forEach(function(m) {
+    if(day === 'all' || m._spotDay === parseInt(day)) {
+      if(!map.hasLayer(m)) map.addLayer(m);
+    } else {
+      if(map.hasLayer(m)) map.removeLayer(m);
+    }
+  });
+  if(day !== 'all') {
+    var visible = markers.filter(function(m){ return m._spotDay === parseInt(day); });
+    if(visible.length > 0) {
+      var group = L.featureGroup(visible);
+      map.fitBounds(group.getBounds().pad(0.2));
+    }
+  } else {
+    map.setView([24.40, 124.18], 11);
+  }
+}
+
+// Init map when tab is shown
+var origShowTab = showTab;
+showTab = function(id) {
+  origShowTab(id);
+  if(id === 'map') {
+    setTimeout(function(){ initMap(); if(map) map.invalidateSize(); }, 100);
+  }
+};
+</script>
+
+</body>
+</html>
