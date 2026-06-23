@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>石垣島 4天3夜｜2026.7.7–7.10 v4.2</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
+
+:root {
+  --ocean: #1B5E8A;
+  --ocean-light: #2E7AB8;
+  --ocean-pale: #E8F4FD;
+  --coral: #E05A2B;
+  --coral-light: #F2784B;
+  --sand: #F7F2E8;
+  --sand-dark: #EDE4D0;
+  --white: #FFFFFF;
+  --text: #2C2C2C;
+  --text-muted: #666666;
+  --border: #D4C9B0;
+  --warn: #F59E0B;
+  --warn-bg: #FFFBEB;
+  --green: #2E7D52;
+  --green-bg: #EDFAF2;
+  --teal: #1A6B5A;
+  --purple: #5B3A8A;
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+  background: var(--sand);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(160deg, var(--ocean) 0%, #0D3A5C 100%);
+  color: white;
+  padding: 32px 20px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0; right: 0;
+  height: 28px;
+  background: var(--sand);
+  border-radius: 28px 28px 0 0;
+}
+.hero-wave {
+  position: absolute;
+  top: 0; right: -20px;
+  opacity: 0.07;
+  font-size: 180px;
+  line-height: 1;
+  pointer-events: none;
+}
+.hero h1 { font-size: 22px; font-weight: 700; letter-spacing: 0.02em; margin-bottom: 6px; }
+.hero .subtitle { font-size: 14px; opacity: 0.82; margin-bottom: 16px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.hero-badge {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* ── NAV ── */
+.nav-wrap {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--white);
+  border-bottom: 2px solid var(--border);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.nav-wrap::-webkit-scrollbar { display: none; }
+.nav-tabs { display: flex; min-width: max-content; padding: 0 12px; }
+.nav-tab {
+  padding: 12px 16px;
+  font-size: 14px; font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+  transition: all 0.2s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.nav-tab.active { color: var(--ocean); border-bottom-color: var(--ocean); }
+
+/* ── CONTENT ── */
+.content { padding: 0 16px 60px; max-width: 720px; margin: 0 auto; }
+.section { display: none; padding-top: 20px; }
+.section.active { display: block; }
+
+/* ── CARDS ── */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 14px;
+  border: 1px solid var(--border);
+}
+.card-title {
+  font-size: 14px; font-weight: 700;
+  color: var(--ocean);
+  margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+
+/* ── INFO TABLE ── */
+.info-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.info-table tr { border-bottom: 1px solid var(--sand-dark); }
+.info-table tr:last-child { border-bottom: none; }
+.info-table td { padding: 8px 4px; vertical-align: top; }
+.info-table td:first-child {
+  color: var(--text-muted); white-space: nowrap;
+  padding-right: 12px; font-weight: 500; width: 72px;
+}
+
+/* ── ALERT ── */
+.alert {
+  border-radius: var(--radius-sm);
+  padding: 12px 14px; font-size: 14px;
+  margin-bottom: 12px; line-height: 1.6;
+}
+.alert-warn { background: var(--warn-bg); border-left: 3px solid var(--warn); }
+.alert-info { background: var(--ocean-pale); border-left: 3px solid var(--ocean-light); }
+.alert-good { background: var(--green-bg); border-left: 3px solid var(--green); }
+.alert strong { font-weight: 700; }
+
+/* ── SECTION TITLE ── */
+.section-title {
+  font-size: 16px; font-weight: 700;
+  color: var(--ocean);
+  padding: 6px 0 10px;
+  border-bottom: 2px solid var(--ocean-pale);
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* ── DAY LABEL ── */
+.day-label {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 16px; padding: 12px 16px;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--ocean) 0%, var(--ocean-light) 100%);
+  color: white;
+}
+.day-label.teal { background: linear-gradient(135deg, var(--teal) 0%, #2E9E87 100%); }
+.day-label.coral { background: linear-gradient(135deg, #C0482A 0%, var(--coral) 100%); }
+.day-label.purple { background: linear-gradient(135deg, var(--purple) 0%, #7E57C2 100%); }
+.day-num { font-size: 26px; font-weight: 700; opacity: 0.9; line-height: 1; }
+.day-info { flex: 1; }
+.day-date { font-size: 13px; opacity: 0.85; }
+.day-theme { font-size: 14px; font-weight: 600; }
+
+/* ── TIMELINE ── */
+.timeline { list-style: none; }
+.tl-item {
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  gap: 0 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--sand-dark);
+}
+.tl-item:last-child { border-bottom: none; }
+.tl-time { font-size: 13px; font-weight: 700; color: var(--ocean); padding-top: 2px; line-height: 1.4; }
+.tl-time.key { color: var(--coral); }
+.tl-body { font-size: 15px; }
+.tl-main { font-weight: 600; margin-bottom: 2px; }
+.tl-note { font-size: 14px; color: var(--text-muted); }
+.tl-tag {
+  display: inline-block;
+  background: var(--ocean-pale); color: var(--ocean);
+  border-radius: 4px; padding: 0 6px;
+  font-size: 13px; font-weight: 600;
+  margin-left: 4px; vertical-align: middle;
+}
+.tl-tag.warn { background: var(--warn-bg); color: #B45309; }
+.tl-tag.green { background: var(--green-bg); color: var(--green); }
+
+/* ── BUS TABLE ── */
+.bus-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 6px; }
+.bus-table th {
+  background: var(--ocean); color: white;
+  padding: 8px 10px; font-size: 13px; font-weight: 600; text-align: center;
+}
+.bus-table td { padding: 7px 8px; text-align: center; border-bottom: 1px solid var(--sand-dark); }
+.bus-table tr:last-child td { border-bottom: none; }
+.bus-table tr.highlight td { background: #FFF0E8; font-weight: 700; color: var(--coral); }
+.bus-table tr:nth-child(even):not(.highlight) td { background: var(--sand); }
+
+/* ── SPOT CARD ── */
+.spot {
+  border-left: 3px solid var(--ocean-light);
+  padding: 10px 12px;
+  background: var(--sand);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin-bottom: 10px; font-size: 15px;
+}
+.spot-name { font-weight: 700; color: var(--ocean); margin-bottom: 4px; font-size: 14px; }
+.spot-detail { color: var(--text-muted); font-size: 14px; line-height: 1.6; }
+.spot-tag {
+  display: inline-block; background: var(--coral); color: white;
+  border-radius: 4px; padding: 1px 7px;
+  font-size: 13px; font-weight: 600; margin-right: 4px;
+}
+.spot-tag.free { background: var(--green); }
+.spot-tag.indoor { background: var(--teal); }
+.spot-tag.shade { background: #7E57C2; }
+
+/* ── RESTAURANT CARD ── */
+.resto {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.resto-head {
+  padding: 11px 14px; font-size: 14px; font-weight: 700;
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--ocean); color: white;
+}
+.resto-head.teal { background: var(--teal); }
+.resto-head.coral { background: #C0482A; }
+.resto-body { padding: 10px 14px; font-size: 14px; background: var(--white); }
+.resto-row { font-size: 14px; color: var(--text-muted); padding: 3px 0; border-bottom: 1px solid var(--sand-dark); }
+.resto-row:last-child { border-bottom: none; }
+.resto-row strong { color: var(--text); }
+.beef-ok { display: inline-block; background: var(--green-bg); color: var(--green); border-radius: 4px; padding: 0 6px; font-size: 12px; font-weight: 700; margin-left: 4px; }
+.beef-check { display: inline-block; background: var(--warn-bg); color: #B45309; border-radius: 4px; padding: 0 6px; font-size: 12px; font-weight: 700; margin-left: 4px; }
+
+/* ── MAP ── */
+#trip-map { height: 400px; width: 100%; }
+#map-container { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; margin-bottom: 14px; }
+.map-legend { padding: 10px 16px; border-top: 1px solid var(--sand-dark); }
+.legend-title { font-size: 14px; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; }
+.legend-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.legend-item { display: flex; align-items: center; gap: 5px; font-size: 14px; color: var(--text-muted); }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.day-filter { display: flex; gap: 6px; padding: 10px 16px; border-bottom: 1px solid var(--sand-dark); flex-wrap: wrap; }
+.day-btn {
+  padding: 6px 13px; border-radius: 20px; font-size: 13px; font-weight: 600;
+  cursor: pointer; border: 2px solid transparent; transition: all 0.2s;
+  user-select: none; -webkit-tap-highlight-color: transparent;
+}
+.day-btn:not(.active) { background: var(--sand); color: var(--text-muted); border-color: var(--border); }
+.day-btn[data-day="all"].active { background: #2C2C2C; color: white; }
+.day-btn[data-day="1"].active { background: var(--ocean); color: white; }
+.day-btn[data-day="2"].active { background: var(--teal); color: white; }
+.day-btn[data-day="3"].active { background: #C0482A; color: white; }
+
+/* ── TRANSPORT TABLE ── */
+.transport-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 4px; }
+.transport-table th { background: var(--ocean); color: white; padding: 9px 10px; text-align: left; font-weight: 600; font-size: 14px; }
+.transport-table td { padding: 9px 10px; border-bottom: 1px solid var(--sand-dark); vertical-align: top; font-size: 14px; }
+.transport-table tr:nth-child(even) td { background: var(--sand); }
+.transport-table tr:last-child td { border-bottom: none; }
+
+/* ── MAPCODE TABLE ── */
+.mapcode-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.mapcode-table th { background: var(--ocean); color: white; padding: 8px 10px; font-size: 14px; font-weight: 600; }
+.mapcode-table td { padding: 8px 10px; border-bottom: 1px solid var(--sand-dark); font-size: 14px; }
+.mapcode-table tr:nth-child(even) td { background: var(--sand); }
+.mapcode-table tr:last-child td { border-bottom: none; }
+.mapcode { font-family: monospace; background: var(--sand-dark); padding: 2px 7px; border-radius: 4px; font-size: 13px; }
+
+
+@media (max-width: 400px) {
+  .hero h1 { font-size: 19px; }
+}
+</style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-wave">🏝</div>
+  <h1>🗾 石垣島 4天3夜</h1>
+  <div class="subtitle">2026年7月7日（二）— 7月10日（五）</div>
+  
+</div>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <div class="nav-tabs">
+    <div class="nav-tab active" data-tab="info">📋 基本資訊</div>
+    <div class="nav-tab" data-tab="day1">Day 1</div>
+    <div class="nav-tab" data-tab="day2">Day 2</div>
+    <div class="nav-tab" data-tab="day3">Day 3</div>
+    <div class="nav-tab" data-tab="day4">Day 4 回程</div>
+    <div class="nav-tab" data-tab="bus">🚌 公車攻略</div>
+    <div class="nav-tab" data-tab="map">🗺 地圖</div>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ══════════════ 基本資訊 ══════════════ -->
+<div id="section-info" class="section active">
+
+  <div class="section-title">✈ 航班</div>
+  <div class="card">
+    <table class="info-table">
+      <tr><td>去程</td><td>IT736　桃園 06:35 → 南ぬ島石垣空港 08:35</td></tr>
+      <tr><td>回程</td><td>IT737　南ぬ島石垣空港 09:25 → 桃園 09:35<br><small style="color:var(--text-muted)">⚠ 09:25 起飛，建議 08:15 前完成安檢</small></td></tr>
+    </table>
+  </div>
+
+  <div class="section-title">🏨 住宿</div>
+  <div class="card">
+    <table class="info-table">
+      <tr><td>飯店</td><td><strong>KARCHIBE ISHIGAKI</strong><br><small style="color:var(--text-muted)">382-6 Ohama, Ishigaki, Okinawa 907-0001</small></td></tr>
+      <tr><td>公車站</td><td>大浜農協前（大濱農協前）步行約 3–4 分鐘<br><small style="color:var(--text-muted)">適用系統④、系統⑩</small></td></tr>
+      <tr><td>碼頭→飯店</td><td>約 4.7 km，車程約 20 分鐘</td></tr>
+      <tr><td>ORIX→飯店</td><td>約 1.8 km，車程約 8 分鐘</td></tr>
+    </table>
+  </div>
+
+  <div class="section-title">🚗 租車</div>
+  <div class="card">
+    <table class="info-table">
+      <tr><td>公司</td><td>ORIX レンタカー 石垣島店</td></tr>
+      <tr><td>地址</td><td>沖縄県石垣市東野城655-3 Eneos 中道服務站內</td></tr>
+      <tr><td>電話</td><td>0980-83-8543</td></tr>
+      <tr><td>取車</td><td>7/7（二）14:00</td></tr>
+      <tr><td>還車</td><td>7/9（四）14:00　⚠ 請準時</td></tr>
+      <tr><td>預約號</td><td>W7906720</td></tr>
+      <tr><td>保險</td><td>事故免責険 + レンタカー安心優遇制度</td></tr>
+    </table>
+  </div>
+
+  <div class="section-title">🧳 行李寄放</div>
+  <div class="card">
+    <table class="info-table">
+      <tr><td>地點</td><td>石垣港離島ターミナル（石垣港離島碼頭，Euglena ターミナル）大廳</td></tr>
+      <tr><td>付款</td><td>💴 <strong>現金</strong></td></tr>     
+    </table>
+    <table class="transport-table" style="margin-top:10px;">
+      <thead><tr><th>方案</th><th>日文名</th><th>費用/件/日</th></tr></thead>
+      <tbody>
+        <tr><td>安榮觀光櫃檯</td><td>安栄観光カウンター<br><small>（安榮觀光服務台）</small></td><td>約 ¥500</td></tr>
+        <tr><td>八重山觀光渡輪櫃檯</td><td>八重山観光フェリーカウンター<br><small>（八重山觀光渡輪服務台）</small></td><td>約 ¥500</td></tr>
+        <tr><td>投幣式儲物櫃</td><td>投幣式置物ロッカー<br><small>（投幣式置物ロッカー）</small></td><td>¥300–500<br><small>（視尺寸）</small></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title">💴 費用粗估</div>
+  <div class="card">
+    <table class="transport-table">
+      <thead><tr><th>項目</th><th>費用/人</th><th>台幣</th></tr></thead>
+      <tbody>
+        <tr><td>Day 1 公車（機場→市區）</td><td>¥540</td><td>約 116 元</td></tr>
+        <tr><td>Day 3 公車（還車後→市區）</td><td>¥200 以內</td><td>約 43 元</td></tr>
+        <tr><td>Day 4 公車（飯店→機場）</td><td>¥250</td><td>約 54 元</td></tr>
+        <tr><td>石垣島鍾乳洞 門票</td><td>¥1,200</td><td>約 258 元</td></tr>
+        <tr><td>行李寄放 Day 1</td><td>¥300–500/件</td><td>約 65–108 元</td></tr>
+      </tbody>
+    </table>
+    <div style="font-size:11px;color:var(--text-muted);margin-top:8px;">匯率：¥1 ≒ 台幣 0.215 元</div>
+  </div>
+
+</div>
+
+<!-- ══════════════ DAY 1 ══════════════ -->
+<div id="section-day1" class="section">
+  <div class="day-label">
+    <div class="day-num">1</div>
+    <div class="day-info">
+      <div class="day-date">7月7日（二）</div>
+      <div class="day-theme">抵達日｜機場 → 離島碼頭 → 早午餐 → 取車 → 桃林寺 → 夕陽 → 飯店</div>
+    </div>
+  </div>
+
+  <div class="alert alert-info">
+    路線方向：機場 → 離島碼頭（公車）→ 早午餐逛街 → ORIX 取車 → 桃林寺 → 離島碼頭取行李 → フサキビーチ夕陽 → 晚餐 → 美思佰樂 → 飯店
+  </div>
+
+
+  <div class="section-title">🕐 行程時間表</div>
+  <div class="card">
+    <ul class="timeline">
+      <li class="tl-item">
+        <div class="tl-time">08:35</div>
+        <div class="tl-body">
+          <div class="tl-main">✈ 落地南ぬ島石垣空港</div>
+          <div class="tl-note">入境、領行李</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">09:50</div>
+        <div class="tl-body">
+          <div class="tl-main">🚌 搭 Karry Kanko 直達巴士</div>
+          <div class="tl-note">機場 → 石垣港離島碼頭｜¥540/人｜約 40 分鐘</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">10:30</div>
+        <div class="tl-body">
+          <div class="tl-main">🧳 行李寄放 離島碼頭儲物櫃</div>
+          <div class="tl-note">安榮觀光或八重山觀光渡輪櫃檯 / 投幣式儲物櫃均可｜💴 現金</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time"></div>
+        <div class="tl-body">
+          <div class="tl-main">🍽️ 早午餐 ＆ 逛街 <span class="tl-tag">Euglena モール（Euglena 商場）周邊</span></div>
+          <div class="tl-note">Euglena モール（Euglena 商場）、石垣市公設市場（石垣市公設市場）一帶</div>
+        </div>
+      </li>
+
+      
+      <li class="tl-item">
+        <div class="tl-time key">14:00</div>
+        <div class="tl-body">
+          <div class="tl-main">🚗 取車 ✅ <span class="tl-tag warn">ファストチェックイン（快速取車服務）</span></div>
+          <div class="tl-note">預約號碼 W7906720；ORIX 石垣島店提供石垣港離島ターミナル的免費接送服務</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time"></div>
+        <div class="tl-body">
+          <div class="tl-main">🏯 桃林寺・権現堂（桃林寺・権現堂）</div>
+          <div class="tl-note">🚗 ORIX → 此處 約 8 分鐘｜免費｜石垣島最古老寺廟（1614年），樹蔭遮蔽</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time"></div>
+        <div class="tl-body">
+          <div class="tl-main">🧳 返回離島碼頭取行李(17:30前)</div>
+          <div class="tl-note">🚗 桃林寺 → 離島碼頭 約 10 分鐘｜安榮觀光或八重山觀光渡輪櫃檯 / 投幣式儲物櫃取件</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time"></div>
+        <div class="tl-body">
+          <div class="tl-main">🌅 フサキビーチ（富崎海灘）棧橋夕陽</div>
+          <div class="tl-note">🚗 離島碼頭 → 此處 約 15 分鐘｜免費｜棧橋延伸入海，夕陽沉落西表島剪影後方｜日落約 19:30–20:00</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time"></div>
+        <div class="tl-body">
+          <div class="tl-main">🍽️ 晚餐</div>
+          <div class="tl-note">🚗 フサキビーチ → 市區 約 15 分鐘</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time"></div>
+        <div class="tl-body">
+          <div class="tl-main">🛒 美思佰樂 ヤイマ店（美思佰樂八重山店）採買</div>
+          <div class="tl-note">飲水、零食採買</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time"></div>
+        <div class="tl-body">
+          <div class="tl-main">🏨 前往 KARCHIBE ISHIGAKI チェックイン（Check-in）</div>
+          <div class="tl-note">KARCHIBE ISHIGAKI</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="section-title">🚗 點到點車程</div>
+  <div class="card">
+    <table class="transport-table">
+      <thead><tr><th>路段</th><th>距離</th><th>時間</th></tr></thead>
+      <tbody>
+        <tr><td>南ぬ島石垣空港（新石垣機場）→ 石垣港離島ターミナル（離島碼頭）</td><td>約 20 km</td><td>公車約 40 分鐘</td></tr>
+        <tr><td>離島碼頭 → ORIX 石垣島店（租車店）</td><td>約 1.3 km</td><td>步行約 15 分鐘</td></tr>
+        <tr><td>ORIX 石垣島店 → 桃林寺・権現堂（桃林寺・権現堂）</td><td>約 1.5 km</td><td>車程約 8 分鐘</td></tr>
+        <tr><td>桃林寺 → 石垣港離島ターミナル（離島碼頭）取行李</td><td>約 1.5 km</td><td>車程約 10 分鐘</td></tr>
+        <tr><td>離島碼頭 → フサキビーチ（富崎海灘）</td><td>約 6 km</td><td>車程約 15 分鐘</td></tr>
+        <tr><td>フサキビーチ → 市區晚餐</td><td>約 6 km</td><td>車程約 15 分鐘</td></tr>
+        <tr><td>晚餐 → 美思佰樂 ヤイマ店（美思佰樂八重山店）</td><td>約 2 km</td><td>車程約 8 分鐘</td></tr>
+        <tr><td>美思佰樂 → KARCHIBE ISHIGAKI（住宿）</td><td>約 4 km</td><td>車程約 15 分鐘</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════ DAY 2 ══════════════ -->
+<div id="section-day2" class="section">
+  <div class="day-label teal">
+    <div class="day-num">2</div>
+    <div class="day-info">
+      <div class="day-date">7月8日（三）</div>
+      <div class="day-theme">北部環島｜縣道 79 號北上</div>
+    </div>
+  </div>
+
+  <div class="alert alert-info">
+    路線方向：飯店（南）→ 鍾乳洞 → 米子燒工坊 → 玉取崎（東北）→ 午餐（北部）→ 平久保崎（最北）→ 吹通川（南下）→ 唐吉軻德 → 晚餐 → 飯店
+  </div>
+
+
+  <div class="section-title">🕐 行程時間表</div>
+  <div class="card">
+    <ul class="timeline">
+      <li class="tl-item">
+        <div class="tl-time" style="visibility:hidden">--:--</div>
+        <div class="tl-body">
+          <div class="tl-main">🚗 出發</div>
+          <div class="tl-note"></div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time" style="visibility:hidden">--:--</div>
+        <div class="tl-body">
+          <div class="tl-main">🪨 石垣島鍾乳洞（石垣島鍾乳洞）<span class="tl-tag warn">¥1,200/人</span><span class="tl-tag" style="background:var(--teal); color:White">室內</span></div>
+          <div class="tl-note">🚗 飯店 → 此處 約 10–15 分鐘｜洞內常年約 21°C<br />｜全程步行約 40 分鐘 | 營業時間：09:00 – 18:30（最後入場 18:00）</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time" style="visibility:hidden">--:--</div>
+        <div class="tl-body">
+          <div class="tl-main">🏺 米子燒工坊 Yoneko Yaki（米子焼工房）</div>
+          <div class="tl-note">🚗 鍾乳洞 → 此處 約 5 分鐘｜免費參觀｜彩繪シーサー（石獅）選購</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time" style="visibility:hidden">--:--</div>
+        <div class="tl-body">
+          <div class="tl-main">🏔️ 玉取崎展望台（玉取崎展望台）<span class="tl-tag green">免費</span></div>
+          <div class="tl-note">🚗 米子燒工坊 → 此處 約 25 分鐘｜有遮蔭涼亭，眺望東海岸碧海</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time" style="visibility:hidden">--:--</div>
+        <div class="tl-body">
+          <div class="tl-main">🍽️ 午餐（北部沿線）</div>
+          <div class="tl-note">🚗 玉取崎 → 此處 約 20 分鐘</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time" style="visibility:hidden">--:--</div>
+        <div class="tl-body">
+          <div class="tl-main">🏮 平久保崎灯台（平久保崎燈塔）<span class="tl-tag green">免費</span></div>
+          <div class="tl-note">🚗 午餐地點 → 此處 約 15 分鐘｜石垣島最北端，太平洋 360° 視野｜⚠ 風大，注意帽子</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time" style="visibility:hidden">--:--</div>
+        <div class="tl-body">
+          <div class="tl-main">🌿 吹通川ヒルギ群落（吹通川紅樹林群落）<span class="tl-tag green">免費</span></div>
+          <div class="tl-note">🚗 平久保崎 → 此處 約 30 分鐘｜紅樹林步道，樹蔭遮蔽</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time" style="visibility:hidden">--:--</div>
+        <div class="tl-body">
+          <div class="tl-main">🛍️ ドン・キホーテ 石垣島店（唐吉軻德）</div>
+          <div class="tl-note">🚗 吹通川 → 此處 約 35 分鐘｜伴手禮、零食、藥妝採買</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time" style="visibility:hidden">--:--</div>
+        <div class="tl-body">
+          <div class="tl-main">🍽️ 晚餐</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time" style="visibility:hidden">--:--</div>
+        <div class="tl-body">
+          <div class="tl-main">🏨 返回飯店</div>
+          <div class="tl-note">🚗 唐吉軻德 → 飯店 約 15 分鐘</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="section-title">🚗 點到點車程</div>
+  <div class="card">
+    <table class="transport-table">
+      <thead><tr><th>路段</th><th>距離</th><th>時間</th></tr></thead>
+      <tbody>
+        <tr><td>飯店 → 石垣島鍾乳洞（石垣島鍾乳洞）</td><td>約 5 km</td><td>車程約 10–15 分鐘</td></tr>
+        <tr><td>石垣島鍾乳洞 → 米子燒工坊（米子焼工房）</td><td>約 2 km</td><td>車程約 5 分鐘</td></tr>
+        <tr><td>米子燒工坊 → 玉取崎展望台（玉取崎展望台）</td><td>約 17 km</td><td>車程約 25 分鐘</td></tr>
+        <tr><td>玉取崎展望台 → 午餐地點（北部沿線）</td><td>約 12 km</td><td>車程約 20 分鐘</td></tr>
+        <tr><td>午餐地點 → 平久保崎灯台（平久保崎燈塔）</td><td>約 9 km</td><td>車程約 15 分鐘</td></tr>
+        <tr><td>平久保崎灯台 → 吹通川ヒルギ群落（吹通川紅樹林）</td><td>約 22 km</td><td>車程約 30 分鐘</td></tr>
+        <tr><td>吹通川ヒルギ群落 → ドン・キホーテ（唐吉軻德）</td><td>約 23 km</td><td>車程約 35 分鐘</td></tr>
+        <tr><td>ドン・キホーテ（唐吉軻德）→ 飯店</td><td>約 4 km</td><td>車程約 15 分鐘</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  
+</div>
+
+<!-- ══════════════ DAY 3 ══════════════ -->
+<div id="section-day3" class="section">
+  <div class="day-label coral">
+    <div class="day-num">3</div>
+    <div class="day-info">
+      <div class="day-date">7月9日（四）</div>
+      <div class="day-theme">西部景點｜14:00 還車 → 市區採買</div>
+    </div>
+  </div>
+
+  <div class="alert alert-info">
+    路線方向：飯店（南）→ 川平湾（西北）→ 川平観音堂 → 午餐 → ORIX 還車（東）→ 公車市區 → 飯店
+  </div>
+
+
+  <div class="section-title">🕐 行程時間表</div>
+  <div class="card">
+    <ul class="timeline">
+      <li class="tl-item">
+        <div class="tl-time" style="visibility:hidden">--:--</div>
+        <div class="tl-body"><div class="tl-main">🚗 出發</div></div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time" style="visibility:hidden">--:--</div>
+        <div class="tl-body">
+          <div class="tl-main">🌊 川平湾（川平灣）展望台<span class="tl-tag green">免費</span></div>
+          <div class="tl-note">🚗 飯店 → 此處 約 30 分鐘｜米其林三星景點，高台眺望白沙藍海</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time" style="visibility:hidden">--:--</div>
+        <div class="tl-body">
+          <div class="tl-main">⛩ 川平観音堂（川平觀音堂）<span class="tl-tag green">免費</span></div>
+          <div class="tl-note">🚶 川平湾 → 此處 步行約 3 分鐘｜川平湾旁小型觀音堂，靜謐清幽</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time" style="visibility:hidden">13:05</div>
+        <div class="tl-body">
+          <div class="tl-main">🍽️ 午餐（川平湾 一帶）</div>
+          <div class="tl-note">🚗 川平観音堂 → 此處 步行圈內｜至少 1 小時</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time key">14:00</div>
+        <div class="tl-body">
+          <div class="tl-main">🚗 ORIX 石垣島店 還車</div>
+          <div class="tl-note">🚗 川平観音堂 → 此處 約 30 分鐘</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time" style="visibility:hidden">14:45</div>
+        <div class="tl-body">
+          <div class="tl-main">🚌 搭公車：八重山毎日新聞社前（八重山每日新聞社前）→ バスターミナル（巴士總站）</div>
+          <div class="tl-note">系統④｜14:46 發車｜💴 現金</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time" style="visibility:hidden">15:00</div>
+        <div class="tl-body">
+          <div class="tl-main">🛍️ 市區逛街</div>
+          <div class="tl-note"</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time" style="visibility:hidden">18:30</div>
+        <div class="tl-body">
+          <div class="tl-main">🍽️ 晚餐（市區）</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time" style="visibility:hidden">20:30</div>
+        <div class="tl-body">
+          <div class="tl-main">🚌 搭公車返回飯店</div>
+          <div class="tl-note">系統④ 或系統⑩ → 大浜農協前（大濱農協前）｜💴 現金</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="section-title">🚗 點到點車程</div>
+  <div class="card">
+    <table class="transport-table">
+      <thead><tr><th>路段</th><th>距離</th><th>時間</th></tr></thead>
+      <tbody>
+        <tr><td>飯店 → 川平湾（川平灣）</td><td>約 25 km</td><td>車程約 30 分鐘</td></tr>
+        <tr><td>川平湾 → 川平観音堂（川平觀音堂）</td><td>約 200 m</td><td>步行約 3 分鐘</td></tr>
+        <tr><td>川平観音堂 → ORIX 石垣島店（還車）</td><td>約 20 km</td><td>車程約 30 分鐘</td></tr>
+        <tr><td>ORIX → 八重山毎日新聞社前（巴士站）</td><td>約 50 m</td><td>步行約 1 分鐘</td></tr>
+        <tr><td>八重山毎日新聞社前 → バスターミナル（巴士總站）</td><td>約 2 km</td><td>公車約 10 分鐘</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════ DAY 4 ══════════════ -->
+<div id="section-day4" class="section">
+  <div class="day-label purple">
+    <div class="day-num">4</div>
+    <div class="day-info">
+      <div class="day-date">7月10日（五）</div>
+      <div class="day-theme">回程日｜公車 → 機場 → 桃園</div>
+    </div>
+  </div>
+
+  <div class="alert alert-warn">
+    <strong>⚠ IT737 起飛 09:25，建議 08:15 前完成安檢</strong><br>
+    早晨不建議外出用餐，請前一晚備好早餐乾糧。
+  </div>
+
+  <div class="section-title">🕐 早晨流程</div>
+  <div class="card">
+    <ul class="timeline">
+      <li class="tl-item">
+        <div class="tl-time">06:30</div>
+        <div class="tl-body">
+          <div class="tl-main">🌅 起床、整理行李、退房 チェックアウト</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">07:10</div>
+        <div class="tl-body">
+          <div class="tl-main">🚶 步行至 大浜農協前 公車站</div>
+          <div class="tl-note">飯店步行約 3–4 分鐘（約 200m）</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time key">07:17</div>
+        <div class="tl-body">
+          <div class="tl-main">🚌 搭系統④公車：大浜農協前 → 南ぬ島石垣空港</div>
+          <div class="tl-note">¥250/人｜💴 現金</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">07:35</div>
+        <div class="tl-body">
+          <div class="tl-main">✈ 抵達 南ぬ島石垣空港（新石垣機場）</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time key">08:15</div>
+        <div class="tl-body">
+          <div class="tl-main">⚠ 完成安檢 Deadline</div>
+          <div class="tl-note">辦理登機報到 チェックイン（航班報到）、託運行李、過安檢</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">09:25</div>
+        <div class="tl-body">
+          <div class="tl-main">✈ IT737 起飛 → 桃園 09:35 抵達</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════════ 公車攻略 ══════════════ -->
+<div id="section-bus" class="section">
+
+  <div class="section-title">🚌 基本資訊</div>
+  <div class="card">
+    <table class="info-table">
+      <tr><td>公司</td><td>東運輸株式会社（東バス）</td></tr>
+      <tr><td>電話</td><td>0980-87-5423（バスターミナル営業所（巴士總站營業所），08:00–17:00）</td></tr>
+      <tr><td>官網</td><td>azumabus.co.jp</td></tr>
+      <tr><td>付款</td><td>💴 現金（車上有找零機，請備零錢）</td></tr>
+    </table>
+  </div>
+
+  <div class="section-title">📋 搭乘方式</div>
+  <div class="card">
+    <ol style="padding-left:18px;font-size:13.5px;line-height:2;">
+      <li>從<strong>後門（後ろのドア）上車</strong></li>
+      <li>取<strong>整理券（號碼票）</strong>（入口機器自動發出）</li>
+      <li>到站從<strong>前門（前のドア）下車</strong></li>
+      <li>依整理券號碼對應票價，<strong>投幣付款</strong></li>
+    </ol>
+  </div>
+
+  <div class="section-title">🗓 本次使用路線</div>
+
+  <div class="card">
+    <div class="card-title">Day 1｜機場 → 市區</div>
+    <table class="bus-table">
+      <thead><tr><th>路線</th><th>發車</th><th>票價</th></tr></thead>
+      <tbody>
+        <tr class="highlight"><td>Karry Kanko 直達巴士</td><td>09:50</td><td>¥540</td></tr>
+        <tr><td>系統④（備案）</td><td>09:55</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <div style="font-size:12px;color:var(--text-muted);margin-top:8px;">區間：南ぬ島石垣空港（新石垣機場）→ 石垣港離島ターミナル（石垣港離島碼頭）</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Day 3｜還車後 → 市區</div>
+    <table class="bus-table">
+      <thead><tr><th>發車時間（八重山毎日新聞社前（八重山每日新聞社前））</th><th>抵達 バスターミナル（巴士總站）</th></tr></thead>
+      <tbody>
+        <tr class="highlight"><td>14:46</td><td>14:55</td></tr>
+        <tr><td>15:16</td><td>15:25</td></tr>
+        <tr><td>15:46</td><td>15:55</td></tr>
+        <tr><td>16:16</td><td>16:25</td></tr>
+      </tbody>
+    </table>
+    <div style="font-size:12px;color:var(--text-muted);margin-top:8px;">路線：系統④ 平得・大浜・白保経由空港線｜💴 現金</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Day 4｜飯店 → 機場</div>
+    <table class="bus-table">
+      <thead><tr><th>發車（大浜農協前）</th><th>抵達（石垣空港）</th><th>票價</th></tr></thead>
+      <tbody>
+        <tr><td>06:47</td><td>07:05</td><td>¥250</td></tr>
+        <tr class="highlight"><td>07:17 ✅ 建議搭乘</td><td>07:35</td><td>¥250</td></tr>
+        <tr><td>07:47</td><td>08:05 ⚠ 太晚</td><td>¥250</td></tr>
+      </tbody>
+    </table>
+    <div style="font-size:12px;color:var(--text-muted);margin-top:8px;">路線：系統④ 平得・大浜・白保経由空港線｜💴 現金</div>
+  </div>
+
+</div>
+
+<!-- ══════════════ 地圖 ══════════════ -->
+<div id="section-map" class="section">
+  <div class="alert alert-info" style="margin-bottom:12px;">
+    標記上的數字為當日<strong>行程順序</strong>。點擊標記可查看景點說明。
+  </div>
+  <div id="map-container">
+    <div class="day-filter">
+      <button class="day-btn active" data-day="all">全部</button>
+      <button class="day-btn" data-day="1">Day 1</button>
+      <button class="day-btn" data-day="2">Day 2</button>
+      <button class="day-btn" data-day="3">Day 3</button>
+    </div>
+    <div id="trip-map"></div>
+    <div class="map-legend">
+      <div class="legend-title">圖例</div>
+      <div class="legend-grid">
+        <div class="legend-item"><div class="legend-dot" style="background:#1B5E8A"></div>Day 1</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#1A6B5A"></div>Day 2</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#C0482A"></div>Day 3</div>
+        <div class="legend-item"><span style="font-size:18px;line-height:1">⭐</span><span>住宿</span></div>
+      </div>
+      <div style="font-size:11px;color:var(--text-muted);margin-top:6px;">地圖資料來源：OpenStreetMap（免費，無需 API key）</div>
+    </div>
+  </div>
+
+
+  <div class="section-title" id="itinerary-title" style="display:none">🗓 每日行程總覽</div>
+
+  <div class="card" id="itinerary-1" style="display:none">
+    <div style="font-size:14px;font-weight:700;color:#1B5E8A;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--ocean-pale);">
+      📅 Day 1｜7/7（二）抵達日
+    </div>
+    <ol style="padding-left:20px;font-size:14px;line-height:2.2;color:var(--text);">
+      <li>✈ 新石垣空港（新石垣機場）落地</li>
+      <li>🧳 石垣港離島ターミナル（石垣港離島碼頭）寄放行李</li>
+      <li>🚗 ORIX 石垣島店 取車（14:00）</li>
+      <li>⛩ 桃林寺・権現堂（桃林寺・権現堂）</li>
+      <li>🌅 フサキビーチ（富崎海灘）棧橋夕陽</li>
+      <li>🏠 KARCHIBE ISHIGAKI Check-in</li>
+    </ol>
+  </div>
+
+  <div class="card" id="itinerary-2" style="display:none">
+    <div style="font-size:14px;font-weight:700;color:#1A6B5A;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #C8EAD8;">
+      📅 Day 2｜7/8（三）北部環島
+    </div>
+    <ol style="padding-left:20px;font-size:14px;line-height:2.2;color:var(--text);">
+      <li>🪨 石垣島鍾乳洞（石垣島鍾乳洞）</li>
+      <li>🏺 米子燒工坊 Yoneko Yaki（米子焼工房）</li>
+      <li>🏔️ 玉取崎展望台（玉取崎展望台）</li>
+      <li>🏮 平久保崎灯台（平久保崎燈塔）</li>
+      <li>🌿 吹通川ヒルギ群落（吹通川紅樹林群落）</li>
+      <li>🛍️ ドン・キホーテ 石垣島店（唐吉軻德）</li>
+    </ol>
+  </div>
+
+  <div class="card" id="itinerary-3" style="display:none">
+    <div style="font-size:14px;font-weight:700;color:#C0482A;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #F5C9BC;">
+      📅 Day 3｜7/9（四）西部景點 ＋ 市區
+    </div>
+    <ol style="padding-left:20px;font-size:14px;line-height:2.2;color:var(--text);">
+      <li>🌊 川平湾（川平灣）展望台</li>
+      <li>⛩ 川平観音堂（川平觀音堂）</li>
+      <li>🚗 ORIX 石垣島店 還車（14:00）</li>
+    </ol>
+  </div>
+
+</div>
+
+<!-- end content -->
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+
+// ── 景點資料（含行程順序 order）────────────────────────
+var spots = [
+  // Day 1（按行程順序）
+  { day:1, order:1, lat:24.3959677, lng:124.2457641, name:"新石垣空港", note:"IT736 08:35 落地", icon:"✈" },
+  { day:1, order:2, lat:24.3397121, lng:124.1582806, name:"石垣港離島碼頭 寄放行李", note:"安榮觀光 / 八重山觀光渡輪櫃檯 / 投幣式儲物櫃｜¥300–500/件｜💴 現金", icon:"🧳" },
+  { day:1, order:3, lat:24.3377698, lng:124.1659486, name:"ORIX 租車店 取車", note:"14:00 取車｜預約號碼 W7906720", icon:"🚗" },
+  { day:1, order:4, lat:24.343773,  lng:124.155693,  name:"桃林寺・権現堂", note:"1614年創建，石垣島最古老寺廟｜免費", icon:"⛩" },
+  { day:1, order:5, lat:24.3315,    lng:124.1228,    name:"フサキビーチ（富崎海灘）棧橋", note:"免費｜棧橋夕陽｜日落約 19:30–20:00", icon:"🌅" },
+  { day:1, order:6, lat:24.341315,  lng:124.195989,  name:"KARCHIBE ISHIGAKI（住宿）", note:"Check-in｜石垣市大濱 382-6", icon:"🏠" },
+
+  // Day 2（按行程順序）
+  { day:2, order:1, lat:24.341315,  lng:124.195989,  name:"飯店出發", note:"11:00 出發", icon:"🏠" },
+  { day:2, order:2, lat:24.3617425, lng:124.1544657, name:"石垣島鍾乳洞（石垣島鍾乳洞）", note:"¥1,200/人｜洞內 21°C｜公開步道 660m", icon:"🪨" },
+  { day:2, order:3, lat:24.3682,    lng:124.1621,    name:"米子燒工坊 Yoneko Yaki（米子焼工房）", note:"免費參觀｜彩繪シーサー（石獅）選購", icon:"🏺" },
+  { day:2, order:4, lat:24.4905397, lng:124.2789085, name:"玉取崎展望台", note:"免費｜有遮蔭涼亭｜眺望東海岸", icon:"🏔" },
+  { day:2, order:5, lat:24.5841,    lng:124.2673,    name:"平久保崎灯台", note:"石垣島最北端｜免費｜360° 視野", icon:"🏮" },
+  { day:2, order:6, lat:24.4526,    lng:124.1999,    name:"吹通川ヒルギ群落", note:"紅樹林步道｜免費｜有樹蔭", icon:"🌿" },
+  { day:2, order:7, lat:24.3414496, lng:124.192140,  name:"ドン・キホーテ 石垣島店（唐吉軻德 石垣島店）", note:"藥妝、零食、伴手禮採買", icon:"🛒" },
+
+  // Day 3（按行程順序）
+  { day:3, order:1, lat:24.4510142, lng:124.1437196, name:"川平湾（川平灣）", note:"米其林三星｜免費｜高台展望", icon:"🌊" },
+  { day:3, order:2, lat:24.4508,    lng:124.1445,    name:"川平観音堂（川平觀音堂）", note:"川平湾旁｜免費｜靜謐觀音堂", icon:"⛩" },
+  { day:3, order:3, lat:24.3377698, lng:124.1659486, name:"ORIX 租車店 還車", note:"14:00 還車", icon:"🚗" },
+
+  // 住宿標記（全天顯示）
+  { day:0, order:0, lat:24.341315, lng:124.195989, name:"🏠 住宿：KARCHIBE ISHIGAKI", note:"石垣市大濱 382-6", icon:"🏠" },
+];
+
+var DAY_COLORS = { 0:'#555555', 1:'#1B5E8A', 2:'#1A6B5A', 3:'#C0482A' };
+var map, markers = [], polylines = [];
+
+function createIcon(spot) {
+  // 住宿：黃色五角星
+  if (spot.day === 0) {
+    var starSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">'
+      + '<polygon points="20,2 25,15 39,15 28,24 32,37 20,28 8,37 12,24 1,15 15,15" fill="#F5C400" stroke="white" stroke-width="1.5"/>'
+      + '</svg>';
+    return L.divIcon({
+      html: starSvg,
+      iconSize: [40, 40],
+      iconAnchor: [20, 20],
+      popupAnchor: [0, -22],
+      className: ''
+    });
+  }
+  var color = DAY_COLORS[spot.day] || '#555555';
+  var label = String(spot.order);
+  var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="38" height="50" viewBox="0 0 38 50">'
+    + '<path d="M19 2C10.7 2 4 8.7 4 17c0 11 15 31 15 31s15-20 15-31C34 8.7 27.3 2 19 2z" fill="' + color + '" stroke="white" stroke-width="1.5"/>'
+    + '<circle cx="19" cy="17" r="10" fill="white" opacity="0.95"/>'
+    + '<text x="19" y="22" text-anchor="middle" font-size="12" font-weight="700" font-family="sans-serif" fill="' + color + '">' + label + '</text>'
+    + '</svg>';
+  return L.divIcon({
+    html: svg,
+    iconSize: [38, 50],
+    iconAnchor: [19, 50],
+    popupAnchor: [0, -50],
+    className: ''
+  });
+}
+
+function initMap() {
+  if (map) return;
+  map = L.map('trip-map').setView([24.45, 124.18], 11);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    maxZoom: 18
+  }).addTo(map);
+
+  spots.forEach(function(spot) {
+    if (spot.day === 0) {
+      // 住宿：黃色星號，永遠固定顯示，不加入 markers（不受 filter 控制）
+      L.marker([spot.lat, spot.lng], { icon: createIcon(spot) })
+        .bindPopup(
+          '<div style="font-family:sans-serif;min-width:160px">'
+          + '<div style="font-weight:700;font-size:13px;margin-bottom:4px">⭐ ' + spot.name + '</div>'
+          + '<div style="font-size:12px;color:#555;line-height:1.6">' + spot.note + '</div>'
+          + '<div style="margin-top:6px;display:inline-block;background:#F5C400;color:white;border-radius:10px;padding:2px 10px;font-size:11px;font-weight:700">住宿</div>'
+          + '</div>'
+        )
+        .addTo(map);
+      return;
+    }
+    var m = L.marker([spot.lat, spot.lng], { icon: createIcon(spot) })
+      .bindPopup(
+        '<div style="font-family:sans-serif;min-width:180px">'
+        + '<div style="font-weight:700;font-size:13px;margin-bottom:4px">'
+        + '<span style="display:inline-block;background:' + DAY_COLORS[spot.day] + ';color:white;border-radius:50%;width:20px;height:20px;text-align:center;line-height:20px;font-size:11px;margin-right:5px">' + spot.order + '</span>'
+        + spot.name + '</div>'
+        + '<div style="font-size:12px;color:#555;line-height:1.6">' + spot.note + '</div>'
+        + '<div style="margin-top:6px;display:inline-block;background:' + DAY_COLORS[spot.day] + ';color:white;border-radius:10px;padding:2px 10px;font-size:11px;font-weight:700">'
+        + 'Day ' + spot.day + '　順序 ' + spot.order
+        + '</div>'
+        + '</div>'
+      )
+      .addTo(map);
+    m._spotDay = spot.day;
+    m._spotOrder = spot.order;
+    markers.push(m);
+  });
+
+  drawRoutes([1,2,3]);
+}
+
+function drawRoutes(days) {
+  polylines.forEach(function(p){ map.removeLayer(p); });
+  polylines = [];
+  days.forEach(function(d) {
+    var pts = spots
+      .filter(function(s){ return s.day === d; })
+      .sort(function(a,b){ return a.order - b.order; })
+      .map(function(s){ return [s.lat, s.lng]; });
+    if (pts.length > 1) {
+      var pl = L.polyline(pts, {
+        color: DAY_COLORS[d],
+        weight: 3,
+        opacity: 0.5,
+        dashArray: '7, 7'
+      }).addTo(map);
+      polylines.push(pl);
+    }
+  });
+}
+
+function filterMarkers(day, btn) {
+  document.querySelectorAll('.day-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+
+  markers.forEach(function(m) {
+    if (day === 'all' || m._spotDay === parseInt(day)) {
+      if (!map.hasLayer(m)) map.addLayer(m);
+    } else {
+      if (map.hasLayer(m)) map.removeLayer(m);
+    }
+  });
+
+  if (day !== 'all') {
+    var d = parseInt(day);
+    drawRoutes([d]);
+    var visible = markers.filter(function(m){ return m._spotDay === d; });
+    if (visible.length > 0) {
+      var group = L.featureGroup(visible);
+      map.fitBounds(group.getBounds().pad(0.25));
+    }
+    // 行程清單：顯示當日，隱藏其他
+    var title = document.getElementById('itinerary-title');
+    if (title) title.style.display = 'block';
+    [1,2,3].forEach(function(n) {
+      var el = document.getElementById('itinerary-' + n);
+      if (el) el.style.display = (n === d) ? 'block' : 'none';
+    });
+  } else {
+    drawRoutes([1,2,3]);
+    map.setView([24.45, 124.18], 11);
+    // 行程清單：全部隱藏
+    var title = document.getElementById('itinerary-title');
+    if (title) title.style.display = 'none';
+    [1,2,3].forEach(function(n) {
+      var el = document.getElementById('itinerary-' + n);
+      if (el) el.style.display = 'none';
+    });
+  }
+}
+
+// ── Tab 切換 ──────────────────────────────────────────
+function showTab(id) {
+  document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
+  document.querySelectorAll('.nav-tab').forEach(function(t){ t.classList.remove('active'); });
+  var sec = document.getElementById('section-' + id);
+  if (sec) sec.classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach(function(t){
+    if (t.getAttribute('data-tab') === id) t.classList.add('active');
+  });
+  if (id === 'map') {
+    setTimeout(function(){ initMap(); if(map) map.invalidateSize(); }, 100);
+  } else {
+    // 離開地圖頁籤，重置行程清單為隱藏
+    var title = document.getElementById('itinerary-title');
+    if (title) title.style.display = 'none';
+    [1,2,3].forEach(function(n) {
+      var el = document.getElementById('itinerary-' + n);
+      if (el) el.style.display = 'none';
+    });
+  }
+}
+
+// ── 事件綁定（取代 inline onclick）──────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+  // Nav tabs
+  document.querySelectorAll('.nav-tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      var id = this.getAttribute('data-tab');
+      if (id) showTab(id);
+    });
+  });
+
+  // 地圖 filter buttons
+  document.querySelectorAll('.day-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var day = this.getAttribute('data-day');
+      if (day !== null) filterMarkers(day, this);
+    });
+  });
+});
+</script>
+</body>
+</html>
