@@ -278,6 +278,70 @@ body {
 .mapcode { font-family: monospace; background: var(--sand-dark); padding: 2px 7px; border-radius: 4px; font-size: 16px; }
 
 
+
+/* ── FOOD SECTION ── */
+.food-day-title {
+  font-size: 15px; font-weight: 700;
+  padding: 10px 0 8px;
+  margin-bottom: 12px;
+  border-bottom: 2px solid var(--sand-dark);
+  color: var(--text);
+  display: flex; align-items: center; gap: 6px;
+}
+.food-type-label {
+  font-size: 14px; font-weight: 700;
+  color: var(--text-muted);
+  margin: 14px 0 8px;
+  padding-left: 4px;
+  display: flex; align-items: center; gap: 6px;
+}
+.food-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.food-card-head {
+  background: var(--ocean);
+  color: white;
+  padding: 10px 14px;
+  font-size: 14px; font-weight: 700;
+}
+.food-card-head.teal { background: var(--teal); }
+.food-card-head.coral { background: #C0482A; }
+.food-card-body {
+  padding: 0;
+}
+.food-row {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 0;
+  border-bottom: 1px solid var(--sand-dark);
+  font-size: 14px;
+}
+.food-row:last-child { border-bottom: none; }
+.food-label {
+  background: var(--sand);
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 13px;
+  padding: 8px 10px;
+  display: flex; align-items: flex-start;
+}
+.food-value {
+  padding: 8px 12px;
+  color: var(--text);
+  line-height: 1.6;
+}
+.beef-warn {
+  display: inline-block;
+  background: var(--warn-bg); color: #B45309;
+  border-radius: 4px; padding: 1px 7px;
+  font-size: 13px; font-weight: 600;
+  margin-bottom: 4px;
+}
+
 @media (max-width: 400px) {
   .hero h1 { font-size: 19px; }
 }
@@ -298,6 +362,7 @@ body {
 <div class="nav-wrap">
   <div class="nav-tabs">
     <div class="nav-tab active" data-tab="info">📋 基本資訊</div>
+    <div class="nav-tab" data-tab="food">🍜 美食</div>
     <div class="nav-tab" data-tab="map">🗺 地圖</div>
     <div class="nav-tab" data-tab="day1">Day 1</div>
     <div class="nav-tab" data-tab="day2">Day 2</div>
@@ -377,6 +442,320 @@ body {
   </div>
 
 </div>
+
+<!-- ══════════════ 美食 ══════════════ -->
+<div id="section-food" class="section">
+
+  <div class="section-title">🍜 美食推薦</div>
+
+  <!-- ░░ DAY 1 ░░ -->
+  <div class="food-day-title">📅 Day 1｜7/7（二）抵達日・市區</div>
+
+  <div class="food-type-label">🍽️ 早午餐</div>
+
+  <div class="food-card">
+    <div class="food-card-head">Doug's Burger（道格漢堡）石垣島店</div>
+    <div class="food-card-body">
+      <div class="food-row"><div class="food-label">位置</div><div class="food-value">Euglena モール（Euglena 商場）旁</div></div>
+      <div class="food-row"><div class="food-label">交通</div><div class="food-value">離島碼頭步行約 7–8 分鐘</div></div>
+      <div class="food-row"><div class="food-label">費用</div><div class="food-value">¥1,500–3,000｜NT$ 323–645</div></div>
+      <div class="food-row"><div class="food-label">特色</div><div class="food-value">不吃牛必點宮古島黃鰭鮪魚排漢堡，肉汁飽滿；想吃牛有頂級黑毛和牛堡。</div></div>
+    </div>
+  </div>
+
+  <div class="food-card">
+    <div class="food-card-head">公設市場 一番食堂（公設市場 一番食堂）</div>
+    <div class="food-card-body">
+      <div class="food-row"><div class="food-label">位置</div><div class="food-value">石垣市公設市場（石垣市公設市場）3 樓</div></div>
+      <div class="food-row"><div class="food-label">交通</div><div class="food-value">離島碼頭步行約 7 分鐘</div></div>
+      <div class="food-row"><div class="food-label">費用</div><div class="food-value">¥1,000–2,000｜NT$ 215–430</div></div>
+      <div class="food-row"><div class="food-label">特色</div><div class="food-value">傳統大眾家庭食堂。不吃牛點軟骨豬肉蕎麥麵、山苦瓜炒豆腐；想吃牛點石垣牛重（牛丼）。</div></div>
+    </div>
+  </div>
+
+  <div class="food-card">
+    <div class="food-card-head">なかよし食堂（好朋友食堂）</div>
+    <div class="food-card-body">
+      <div class="food-row"><div class="food-label">位置</div><div class="food-value">新榮町（新榮町）一帶</div></div>
+      <div class="food-row"><div class="food-label">交通</div><div class="food-value">離島碼頭步行約 12–15 分鐘</div></div>
+      <div class="food-row"><div class="food-label">費用</div><div class="food-value">¥600–1,000｜NT$ 129–215</div></div>
+      <div class="food-row"><div class="food-label">特色</div><div class="food-value">平價老字號大眾食堂。不吃牛必點炸豬排蓋飯或全豬骨鰹魚熬煮八重山蕎麥麵（無牛）。</div></div>
+    </div>
+  </div>
+
+  <div class="food-type-label">🧋 點心</div>
+
+  <div class="food-card">
+    <div class="food-card-head">Mariya Shake（瑪莉亞奶昔）七人本舗 碼頭店（七人本舖 碼頭店）</div>
+    <div class="food-card-body">
+      <div class="food-row"><div class="food-label">位置</div><div class="food-value">石垣港離島ターミナル（石垣港離島碼頭）大廳內</div></div>
+      <div class="food-row"><div class="food-label">交通</div><div class="food-value">碼頭大廳內，無需移動</div></div>
+      <div class="food-row"><div class="food-label">費用</div><div class="food-value">¥600｜NT$ 129</div></div>
+      <div class="food-row"><div class="food-label">特色</div><div class="food-value">離島碼頭必喝！100% 在地純鮮乳鮮奶奶昔，可免費添加一種水果醬（芒果 / 酸桔醬），完全無牛成分。</div></div>
+    </div>
+  </div>
+
+  <div class="food-card">
+    <div class="food-card-head">Hau Tree Gelato（ハウツリージェラート・朱槿樹冰淇淋）</div>
+    <div class="food-card-body">
+      <div class="food-row"><div class="food-label">位置</div><div class="food-value">市區大川大馬路邊</div></div>
+      <div class="food-row"><div class="food-label">交通</div><div class="food-value">取車後開車約 3 分鐘</div></div>
+      <div class="food-row"><div class="food-label">費用</div><div class="food-value">¥600–800｜NT$ 129–172</div></div>
+      <div class="food-row"><div class="food-label">特色</div><div class="food-value">-20°C 大理石現炒冰淇淋，可選在地芒果、黃金鳳梨或島豆腐與鮮乳現炒，消暑解膩且視覺效果極佳。</div></div>
+    </div>
+  </div>
+
+  <div class="food-card">
+    <div class="food-card-head">cafe AO（AO 咖啡廳）</div>
+    <div class="food-card-body">
+      <div class="food-row"><div class="food-label">位置</div><div class="food-value">離島ターミナル（離島碼頭）步行圈內</div></div>
+      <div class="food-row"><div class="food-label">交通</div><div class="food-value">離島碼頭步行圈內</div></div>
+      <div class="food-row"><div class="food-label">費用</div><div class="food-value">¥600–900｜NT$ 129–194</div></div>
+      <div class="food-row"><div class="food-label">特色</div><div class="food-value">主打アサイーボウル（巴西莓碗）和希臘優格等上鏡輕食，適合早午餐後的咖啡或點心補充。</div></div>
+    </div>
+  </div>
+
+  <div class="food-card">
+    <div class="food-card-head">KLATCH COFFEE（克拉奇咖啡）</div>
+    <div class="food-card-body">
+      <div class="food-row"><div class="food-label">位置</div><div class="food-value">市區・離島碼頭附近</div></div>
+      <div class="food-row"><div class="food-label">交通</div><div class="food-value">離島碼頭步行圈內</div></div>
+      <div class="food-row"><div class="food-label">費用</div><div class="food-value">¥400–600｜NT$ 86–129</div></div>
+      <div class="food-row"><div class="food-label">特色</div><div class="food-value">氣氛不拘謹，有戶外座位，早上即開門，適合取車前的咖啡一杯。</div></div>
+    </div>
+  </div>
+
+  <div class="food-type-label">🌙 晚餐</div>
+
+  <div class="food-card">
+    <div class="food-card-head coral">石垣和牛 かびら亭（石垣和牛 川平亭）</div>
+    <div class="food-card-body">
+      <div class="food-row"><div class="food-label">位置</div><div class="food-value">新榮町（新榮町）一帶</div></div>
+      <div class="food-row"><div class="food-label">交通</div><div class="food-value">フサキビーチ（富崎海灘）回程約 10 分鐘，有專用車位</div></div>
+      <div class="food-row"><div class="food-label">費用</div><div class="food-value">¥5,000–8,000｜NT$ 1,075–1,720</div></div>
+      <div class="food-row"><div class="food-label">特色</div><div class="food-value">沉穩高級創作和食。不吃牛可點高級阿古豬炸豬排、鮮魚壽司御膳；想吃牛有牧場直送石垣牛壽喜燒。</div></div>
+    </div>
+  </div>
+
+  <div class="food-card">
+    <div class="food-card-head">かぶさ食堂（卡布薩食堂）</div>
+    <div class="food-card-body">
+      <div class="food-row"><div class="food-label">位置</div><div class="food-value">市區荒川區一帶</div></div>
+      <div class="food-row"><div class="food-label">交通</div><div class="food-value">フサキビーチ（富崎海灘）回程約 10 分鐘</div></div>
+      <div class="food-row"><div class="food-label">費用</div><div class="food-value">¥1,000–2,000｜NT$ 215–430</div></div>
+      <div class="food-row"><div class="food-label">特色</div><div class="food-value">老字號黃金薑黃蕎麥麵。不吃牛點黃金軟骨豬肉麵、豬排咖哩；想吃牛點炙燒美崎牛塔塔基丼（美崎牛韃靼牛肉丼）。</div></div>
+    </div>
+  </div>
+
+  <!-- ░░ DAY 2 ░░ -->
+  <div class="food-day-title" style="margin-top:24px;">📅 Day 2｜7/8（三）北部環島</div>
+
+  <div class="food-type-label">🥐 點心（出發途中）</div>
+
+  <div class="food-card">
+    <div class="food-card-head teal">さよ公の店（阿小代之店）</div>
+    <div class="food-card-body">
+      <div class="food-row"><div class="food-label">位置</div><div class="food-value">市區登野城（登野城）一帶</div></div>
+      <div class="food-row"><div class="food-label">交通</div><div class="food-value">飯店開車約 6 分鐘</div></div>
+      <div class="food-row"><div class="food-label">費用</div><div class="food-value">¥100 / 顆｜NT$ 22 / 顆</div></div>
+      <div class="food-row"><div class="food-label">特色</div><div class="food-value">島上傳奇沖繩炸サーターアンダーギー（開翁餅），外皮酥脆，有黑糖、紅芋等口味，全植物油炸完全無牛，適合買一袋在車上當自駕點心。⚠ 完售即止。</div></div>
+    </div>
+  </div>
+
+  <div class="food-card">
+    <div class="food-card-head teal">サトウキビジュース専門パーラー（甘蔗汁專門飲料攤）</div>
+    <div class="food-card-body">
+      <div class="food-row"><div class="food-label">位置</div><div class="food-value">米原 ヤエヤマヤシ群落（米原 八重山棕櫚群落）旁</div></div>
+      <div class="food-row"><div class="food-label">交通</div><div class="food-value">鍾乳洞與米子燒工坊之間，順路可停</div></div>
+      <div class="food-row"><div class="food-label">費用</div><div class="food-value">¥400–600｜NT$ 86–129</div></div>
+      <div class="food-row"><div class="food-label">特色</div><div class="food-value">100% 甘蔗與在地水果鮮榨，完全不加糖、水、添加物，十幾種組合可選，自然派石垣島名物飲料。</div></div>
+    </div>
+  </div>
+
+  <div class="food-type-label">☀️ 午餐（北部沿線）</div>
+
+  <div class="food-card">
+    <div class="food-card-head teal">Palm Tree Lanai（棕欖樹涼台）</div>
+    <div class="food-card-body">
+      <div class="food-row"><div class="food-label">位置</div><div class="food-value">米原海岸（米原海岸）/ 米子燒工坊附近</div></div>
+      <div class="food-row"><div class="food-label">交通</div><div class="food-value">米子燒工坊開車約 3 分鐘</div></div>
+      <div class="food-row"><div class="food-label">費用</div><div class="food-value">¥1,000–2,000｜NT$ 215–430</div></div>
+      <div class="food-row"><div class="food-label">特色</div><div class="food-value">180 度無敵海景景觀餐廳。不吃牛必點香蒜奶油蝦拼盤或炸島雞肉盤；想吃牛有特製牛咖哩飯。</div></div>
+    </div>
+  </div>
+
+  <div class="food-card">
+    <div class="food-card-head teal">kitchen いばるま（伊原間小廚）</div>
+    <div class="food-card-body">
+      <div class="food-row"><div class="food-label">位置</div><div class="food-value">玉取崎展望台（玉取崎展望台）附近</div></div>
+      <div class="food-row"><div class="food-label">交通</div><div class="food-value">玉取崎展望台開車約 2 分鐘</div></div>
+      <div class="food-row"><div class="food-label">費用</div><div class="food-value">¥1,000–2,000｜NT$ 215–430</div></div>
+      <div class="food-row"><div class="food-label">特色</div><div class="food-value">療癒港邊農家餐廳。不吃牛有多汁鮮魚漢堡、炸雞排堡；想吃牛必點自家牧場飼育的溫泉蛋燉牛肉角煮丼（溫泉蛋燉牛腩丼）。</div></div>
+    </div>
+  </div>
+
+  <div class="food-card">
+    <div class="food-card-head teal">UliUli Café（烏利烏利咖啡廳）</div>
+    <div class="food-card-body">
+      <div class="food-row"><div class="food-label">位置</div><div class="food-value">玉取崎展望台（玉取崎展望台）附近</div></div>
+      <div class="food-row"><div class="food-label">交通</div><div class="food-value">玉取崎展望台開車約 2 分鐘</div></div>
+      <div class="food-row"><div class="food-label">費用</div><div class="food-value">¥1,000–2,000｜NT$ 215–430</div></div>
+      <div class="food-row"><div class="food-label">特色</div><div class="food-value">綠意手作漢堡咖啡廳，手工揉製麵包。不吃牛有香脆鮮蝦堡或海鮮義大利麵；想吃牛有爆汁黑毛和牛堡。</div></div>
+    </div>
+  </div>
+
+  <div class="food-type-label">🍍 點心（北上途中）</div>
+
+  <div class="food-card">
+    <div class="food-card-head teal">伊原間路邊小農 現切水果杯（伊原間路邊小農 現切水果杯）</div>
+    <div class="food-card-body">
+      <div class="food-row"><div class="food-label">位置</div><div class="food-value">北部半島「伊原間（伊原間）」，往最北端燈塔必經路邊</div></div>
+      <div class="food-row"><div class="food-label">交通</div><div class="food-value">縣道 79 號沿途必經，路邊即停</div></div>
+      <div class="food-row"><div class="food-label">費用</div><div class="food-value">¥500 / 杯｜NT$ 108 / 杯</div></div>
+      <div class="food-row"><div class="food-label">特色</div><div class="food-value">在地現切鳳梨 / 芒果水果杯，清甜爆汁，完全無牛，適合長途車程中的消暑補水。</div></div>
+    </div>
+  </div>
+
+  <div class="food-type-label">🌙 晚餐</div>
+
+  <div class="food-card">
+    <div class="food-card-head teal">Re:hellow Beach（重返海灘）</div>
+    <div class="food-card-body">
+      <div class="food-row"><div class="food-label">位置</div><div class="food-value">真榮里（真榮里）海岸邊</div></div>
+      <div class="food-row"><div class="food-label">交通</div><div class="food-value">ドン・キホーテ（唐吉軻德）開車約 3 分鐘，飯店開車約 5 分鐘</div></div>
+      <div class="food-row"><div class="food-label">費用</div><div class="food-value">¥1,000–3,000｜NT$ 215–645</div></div>
+      <div class="food-row"><div class="food-label">特色</div><div class="food-value">全島最火紅海景網美餐廳，夜間點燈度假風濃厚。不吃牛點島蔬菜タコライス（塔可飯）或海鮮麵；想吃牛點炙燒石垣牛握壽司。</div></div>
+    </div>
+  </div>
+
+  <div class="food-card">
+    <div class="food-card-head teal">旬家 BANCHAN（旬家小菜）</div>
+    <div class="food-card-body">
+      <div class="food-row"><div class="food-label">位置</div><div class="food-value">白保（白保）海岸附近</div></div>
+      <div class="food-row"><div class="food-label">交通</div><div class="food-value">ドン・キホーテ（唐吉軻德）往東開車約 5 分鐘</div></div>
+      <div class="food-row"><div class="food-label">費用</div><div class="food-value">¥2,000–3,000｜NT$ 430–645</div></div>
+      <div class="food-row"><div class="food-label">特色</div><div class="food-value">精緻創作日式和食定食。不吃牛必點名物爆漿高湯厚蛋捲定食或在地現撈鮮魚湯定食；想吃牛有精緻和牛壽喜燒。⚠ 需提早預約。</div></div>
+    </div>
+  </div>
+
+  <div class="food-type-label">🍦 點心（晚上）</div>
+
+  <div class="food-card">
+    <div class="food-card-head teal">Miru Miru 本舖 唐吉訶德店（Miru Miru 本舖 唐吉軻德店）</div>
+    <div class="food-card-body">
+      <div class="food-row"><div class="food-label">位置</div><div class="food-value">ドン・キホーテ 石垣島店（唐吉軻德 石垣島店）建築內</div></div>
+      <div class="food-row"><div class="food-label">交通</div><div class="food-value">ドン・キホーテ（唐吉軻德）建築內</div></div>
+      <div class="food-row"><div class="food-label">費用</div><div class="food-value">¥600 / 雙球｜NT$ 129 / 雙球</div></div>
+      <div class="food-row"><div class="food-label">特色</div><div class="food-value">自家牧場鮮乳義式冰淇淋，推薦「島鹽黑糖」與「紅芋」口味，逛完唐吉軻德後的療癒結尾。</div></div>
+    </div>
+  </div>
+
+  <!-- ░░ DAY 3 ░░ -->
+  <div class="food-day-title" style="margin-top:24px;">📅 Day 3｜7/9（四）西部景點 ＋ 市區</div>
+
+  <div class="food-type-label">☀️ 午餐（川平湾一帶）</div>
+
+  <div class="food-card">
+    <div class="food-card-head coral">のりば食堂（乘船處食堂）</div>
+    <div class="food-card-body">
+      <div class="food-row"><div class="food-label">位置</div><div class="food-value">川平湾（川平灣）公車站牌正對面</div></div>
+      <div class="food-row"><div class="food-label">交通</div><div class="food-value">川平観音堂（川平觀音堂）旁步行約 1 分鐘</div></div>
+      <div class="food-row"><div class="food-label">費用</div><div class="food-value">¥800–1,500｜NT$ 172–323</div></div>
+      <div class="food-row"><div class="food-label">特色</div><div class="food-value">川平湾必吃黃金蕎麥麵，手工將薑黃練入麵條。不吃牛必點黃金軟骨豬肉蕎麥麵（全豬骨鰹魚湯底無牛）；想吃牛可點鮮嫩牛肉蕎麥麵。</div></div>
+    </div>
+  </div>
+
+  <div class="food-card">
+    <div class="food-card-head coral">川平公園茶屋（川平公園茶屋）</div>
+    <div class="food-card-body">
+      <div class="food-row"><div class="food-label">位置</div><div class="food-value">川平湾公園展望台（川平灣公園展望台）入口旁</div></div>
+      <div class="food-row"><div class="food-label">交通</div><div class="food-value">川平湾展望台步行圈內</div></div>
+      <div class="food-row"><div class="food-label">費用</div><div class="food-value">¥900–1,400｜NT$ 194–301</div></div>
+      <div class="food-row"><div class="food-label">特色</div><div class="food-value">傳統日式木造庭園食堂，古色古香。不吃牛吃山苦瓜炒豆腐定食、傳統八重山麵；想吃牛吃熱騰騰炒牛肉定食。</div></div>
+    </div>
+  </div>
+
+  <div class="food-card">
+    <div class="food-card-head coral">R's Cafe（R's 咖啡廳）</div>
+    <div class="food-card-body">
+      <div class="food-row"><div class="food-label">位置</div><div class="food-value">琉球真珠川平本店（琉球珍珠川平本店）內</div></div>
+      <div class="food-row"><div class="food-label">交通</div><div class="food-value">川平湾展望台步行圈內</div></div>
+      <div class="food-row"><div class="food-label">費用</div><div class="food-value">¥600–1,000｜NT$ 129–215</div></div>
+      <div class="food-row"><div class="food-label">特色</div><div class="food-value">川平湾海景咖啡廳，可一邊欣賞川平湾全景一邊用餐，提供沖繩料理與輕食，無需消費珍珠即可入內。</div></div>
+    </div>
+  </div>
+
+  <div class="food-type-label">🧋 點心（川平湾周邊）</div>
+
+  <div class="food-card">
+    <div class="food-card-head coral">川平ファーム（川平農場）</div>
+    <div class="food-card-body">
+      <div class="food-row"><div class="food-label">位置</div><div class="food-value">川平湾周邊</div></div>
+      <div class="food-row"><div class="food-label">交通</div><div class="food-value">川平湾展望台步行圈內</div></div>
+      <div class="food-row"><div class="food-label">費用</div><div class="food-value">¥550–700｜NT$ 118–151</div></div>
+      <div class="food-row"><div class="food-label">特色</div><div class="food-value">榮獲國際三星最高榮譽，100% 濃厚百香果汁，現打百香果冰沙或百香果鮮乳霜淇淋，酸甜清爽超解膩。</div></div>
+    </div>
+  </div>
+
+  <div class="food-card">
+    <div class="food-card-head coral">Carib Cafe（カリブカフェ・加勒比咖啡廳）</div>
+    <div class="food-card-body">
+      <div class="food-row"><div class="food-label">位置</div><div class="food-value">川平湾高處</div></div>
+      <div class="food-row"><div class="food-label">交通</div><div class="food-value">川平湾展望台步行約 3 分鐘</div></div>
+      <div class="food-row"><div class="food-label">費用</div><div class="food-value">¥500–700｜NT$ 108–151</div></div>
+      <div class="food-row"><div class="food-label">特色</div><div class="food-value">可遠眺海景的歐風木造咖啡廳，手工鮮乳義式冰淇淋（Gelato），必點「川平湾海鹽藍」與「島鳳梨雪酪」口味。</div></div>
+    </div>
+  </div>
+
+  <div class="food-card">
+    <div class="food-card-head coral">川平灣小農賣店 黑糖甜甜圈（川平灣小農賣店 黑糖甜甜圈）</div>
+    <div class="food-card-body">
+      <div class="food-row"><div class="food-label">位置</div><div class="food-value">川平湾玻璃船售票處旁</div></div>
+      <div class="food-row"><div class="food-label">交通</div><div class="food-value">川平湾展望台步行圈內</div></div>
+      <div class="food-row"><div class="food-label">費用</div><div class="food-value">¥200–300 / 個｜NT$ 43–65 / 個</div></div>
+      <div class="food-row"><div class="food-label">特色</div><div class="food-value">港口限定現炸黑糖甜甜圈圈餅，外酥內軟，黑糖香氣超濃郁，全植物油炸完全無牛。</div></div>
+    </div>
+  </div>
+
+  <div class="food-type-label">🌙 晚餐（市區）</div>
+
+  <div class="food-card">
+    <div class="food-card-head coral">石垣和牛 かびら亭（石垣和牛 川平亭）</div>
+    <div class="food-card-body">
+      <div class="food-row"><div class="food-label">位置</div><div class="food-value">新榮町（新榮町）一帶</div></div>
+      <div class="food-row"><div class="food-label">交通</div><div class="food-value">市區，還車後公車可達</div></div>
+      <div class="food-row"><div class="food-label">費用</div><div class="food-value">¥5,000–8,000｜NT$ 1,075–1,720</div></div>
+      <div class="food-row"><div class="food-label">特色</div><div class="food-value">沉穩高級創作和食。不吃牛可點高級阿古豬炸豬排、鮮魚壽司御膳；想吃牛有牧場直送石垣牛壽喜燒。</div></div>
+    </div>
+  </div>
+
+  <div class="food-card">
+    <div class="food-card-head coral">かぶさ食堂（卡布薩食堂）</div>
+    <div class="food-card-body">
+      <div class="food-row"><div class="food-label">位置</div><div class="food-value">市區荒川區一帶</div></div>
+      <div class="food-row"><div class="food-label">交通</div><div class="food-value">市區，還車後公車可達</div></div>
+      <div class="food-row"><div class="food-label">費用</div><div class="food-value">¥1,000–2,000｜NT$ 215–430</div></div>
+      <div class="food-row"><div class="food-label">特色</div><div class="food-value">老字號黃金薑黃蕎麥麵。不吃牛點黃金軟骨豬肉麵、豬排咖哩；想吃牛點炙燒美崎牛塔塔基丼（美崎牛韃靼牛肉丼）。</div></div>
+    </div>
+  </div>
+
+  <div class="food-card">
+    <div class="food-card-head coral">光楽園（光樂園）</div>
+    <div class="food-card-body">
+      <div class="food-row"><div class="food-label">位置</div><div class="food-value">市區南邊・自家栽培水果農園</div></div>
+      <div class="food-row"><div class="food-label">交通</div><div class="food-value">還車後公車返飯店途中可順路</div></div>
+      <div class="food-row"><div class="food-label">費用</div><div class="food-value">¥600–1,000｜NT$ 129–215</div></div>
+      <div class="food-row"><div class="food-label">特色</div><div class="food-value">自家栽培グァバ（番石榴）農園咖啡廳，番石榴果汁、果醬鬆餅等，素材感強，展現石垣島別種在地魅力。</div></div>
+    </div>
+  </div>
+
+  <div style="font-size:14px;color:var(--text-muted);padding:12px 0;text-align:center;">
+    匯率：¥1 ≒ NT$ 0.215
+  </div>
+
+</div>
+<!-- end food section -->
+
 
 <!-- ══════════════ DAY 1 ══════════════ -->
 <div id="section-day1" class="section">
