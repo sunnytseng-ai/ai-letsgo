@@ -130,8 +130,7 @@
 
     <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <script>
-        //const N8N_WEBHOOK_URL = 'https://employee-handwrite-sitter.ngrok-free.dev/webhook/go';
-        const N8N_WEBHOOK_URL = 'https://strangle-utopia-accompany.ngrok-free.dev/webhook/go';
+        const N8N_WEBHOOK_URL = 'https://strangle-utopia-accompany.ngrok-free.dev/webhook/walkbar-liff';
         const LIFF_ID = '2010409271-SmsBfGu3';
 
         let allSpots = [];
@@ -429,6 +428,9 @@
                         <span class="text-base font-black px-2 py-0.5 rounded-full whitespace-nowrap" style="background:${typeColor.bg}; color:${typeColor.text};">${spot.類型 || ''}</span>
                     </div>
                     <p class="text-base font-bold" style="color:#5A7D75;">📍 ${spot.縣市 || ''}${spot.區域 || ''}</p>
+                    ${spot.地址 ? `<p class="text-base font-bold" style="color:#5A7D75;">🏠 ${spot.地址}</p>` : ''}
+                    ${spot.電話 ? `<p class="text-base font-bold" style="color:#5A7D75;">📞 ${spot.電話}</p>` : ''}
+                    ${spot.固定公休日參考 ? `<p class="text-base font-bold" style="color:#5A7D75;">🚫 ${spot.固定公休日參考}</p>` : ''}
                     ${spot.費用參考範圍 ? `<p class="text-base font-bold" style="color:#5A7D75;">💰 ${spot.費用參考範圍}</p>` : ''}
                     ${spot.描述 ? `<p class="text-base leading-relaxed" style="color:#264653;">${spot.描述}</p>` : ''}
                     <div class="flex flex-wrap gap-1.5">${keywordHtml}</div>
