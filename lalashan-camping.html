@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>拉拉山露營 2天1夜｜2026.9.19–9.20</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
+
+:root {
+  --forest: #2F5233;
+  --forest-light: #4C7A52;
+  --forest-pale: #EAF3E8;
+  --coral: #E05A2B;
+  --coral-light: #F2784B;
+  --sand: #F7F2E8;
+  --sand-dark: #EDE4D0;
+  --white: #FFFFFF;
+  --text: #2C2C2C;
+  --text-muted: #666666;
+  --border: #D4C9B0;
+  --warn: #F59E0B;
+  --warn-bg: #FFFBEB;
+  --green: #2E7D52;
+  --green-bg: #EDFAF2;
+  --teal: #1A6B5A;
+  --purple: #5B3A8A;
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+  background: var(--sand);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(160deg, var(--forest) 0%, #17301A 100%);
+  color: white;
+  padding: 32px 20px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0; right: 0;
+  height: 28px;
+  background: var(--sand);
+  border-radius: 28px 28px 0 0;
+}
+.hero-wave {
+  position: absolute;
+  top: 0; right: -20px;
+  opacity: 0.08;
+  font-size: 180px;
+  line-height: 1;
+  pointer-events: none;
+}
+.hero h1 { font-size: 22px; font-weight: 700; letter-spacing: 0.02em; margin-bottom: 6px; }
+.hero .subtitle { font-size: 16px; opacity: 0.82; margin-bottom: 16px; }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.hero-badge {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* ── NAV ── */
+.nav-wrap {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--white);
+  border-bottom: 2px solid var(--border);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.nav-wrap::-webkit-scrollbar { display: none; }
+.nav-tabs { display: flex; min-width: max-content; padding: 0 12px; }
+.nav-tab {
+  padding: 12px 16px;
+  font-size: 15px; font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+  transition: all 0.2s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.nav-tab.active { color: var(--forest); border-bottom-color: var(--forest); }
+
+/* ── CONTENT ── */
+.content { padding: 0 16px 60px; max-width: 720px; margin: 0 auto; }
+.section { display: none; padding-top: 20px; }
+.section.active { display: block; }
+
+/* ── CARDS ── */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 14px;
+  border: 1px solid var(--border);
+}
+.card-title {
+  font-size: 16px; font-weight: 700;
+  color: var(--forest);
+  margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+
+/* ── INFO TABLE ── */
+.info-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.info-table tr { border-bottom: 1px solid var(--sand-dark); }
+.info-table tr:last-child { border-bottom: none; }
+.info-table td { padding: 8px 4px; vertical-align: top; }
+.info-table td:first-child {
+  color: var(--text-muted); white-space: nowrap;
+  padding-right: 12px; font-weight: 500; width: 78px;
+}
+
+/* ── ALERT ── */
+.alert {
+  border-radius: var(--radius-sm);
+  padding: 12px 14px; font-size: 15px;
+  margin-bottom: 12px; line-height: 1.65;
+}
+.alert-warn { background: var(--warn-bg); border-left: 3px solid var(--warn); }
+.alert-info { background: var(--forest-pale); border-left: 3px solid var(--forest-light); }
+.alert-good { background: var(--green-bg); border-left: 3px solid var(--green); }
+.alert strong { font-weight: 700; }
+
+/* ── SECTION TITLE ── */
+.section-title {
+  font-size: 16px; font-weight: 700;
+  color: var(--forest);
+  padding: 6px 0 10px;
+  border-bottom: 2px solid var(--forest-pale);
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* ── DAY LABEL ── */
+.day-label {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 16px; padding: 12px 16px;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--forest) 0%, var(--forest-light) 100%);
+  color: white;
+}
+.day-label.coral { background: linear-gradient(135deg, #C0482A 0%, var(--coral) 100%); }
+.day-num { font-size: 26px; font-weight: 700; opacity: 0.9; line-height: 1; }
+.day-info { flex: 1; }
+.day-date { font-size: 15px; opacity: 0.85; }
+.day-theme { font-size: 16px; font-weight: 600; }
+
+/* ── TIMELINE ── */
+.timeline { list-style: none; }
+.tl-item {
+  display: grid;
+  grid-template-columns: 68px 1fr;
+  gap: 0 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--sand-dark);
+}
+.tl-item:last-child { border-bottom: none; }
+.tl-time { font-size: 15px; font-weight: 700; color: var(--forest); padding-top: 2px; line-height: 1.4; }
+.tl-time.key { color: var(--coral); }
+.tl-body { font-size: 15px; }
+.tl-main { font-weight: 600; margin-bottom: 2px; }
+.tl-note { font-size: 14px; color: var(--text-muted); }
+.tl-tag {
+  display: inline-block;
+  background: var(--forest-pale); color: var(--forest);
+  border-radius: 4px; padding: 0 6px;
+  font-size: 12px; font-weight: 600;
+  margin-left: 4px; vertical-align: middle;
+}
+.tl-tag.warn { background: var(--warn-bg); color: #B45309; }
+.tl-tag.green { background: var(--green-bg); color: var(--green); }
+.tl-tag.coral { background: #FFF0E8; color: var(--coral); }
+
+/* ── TRANSPORT / FEE TABLE ── */
+.transport-table { width: 100%; border-collapse: collapse; font-size: 15px; margin-top: 4px; }
+.transport-table th { background: var(--forest); color: white; padding: 9px 10px; text-align: left; font-weight: 600; font-size: 14px; }
+.transport-table td { padding: 9px 10px; border-bottom: 1px solid var(--sand-dark); vertical-align: top; font-size: 14px; }
+.transport-table tr:nth-child(even) td { background: var(--sand); }
+.transport-table tr:last-child td { border-bottom: none; }
+.transport-table tr.highlight td { background: #FFF0E8; font-weight: 700; color: var(--coral); }
+
+/* ── CHECKLIST ── */
+.checklist { list-style: none; }
+.checklist li {
+  display: flex; align-items: flex-start; gap: 8px;
+  padding: 8px 0; border-bottom: 1px solid var(--sand-dark);
+  font-size: 15px;
+}
+.checklist li:last-child { border-bottom: none; }
+.checklist .box {
+  flex-shrink: 0; width: 18px; height: 18px; margin-top: 2px;
+  border: 2px solid var(--forest-light); border-radius: 4px;
+}
+.checklist .who {
+  display: inline-block; background: var(--forest-pale); color: var(--forest);
+  border-radius: 4px; padding: 0 6px; font-size: 12px; font-weight: 600; margin-left: 6px;
+}
+
+/* ── RULE LIST ── */
+.rule-list { padding-left: 20px; font-size: 15px; line-height: 2; color: var(--text); }
+.rule-list li { margin-bottom: 4px; }
+
+@media (max-width: 400px) {
+  .hero h1 { font-size: 19px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-wave">🏕</div>
+  <h1>🌲 拉拉山露營 2天1夜</h1>
+  <div class="subtitle">2026年9月19日（六）— 9月20日（日）</div>
+  <div class="hero-meta">
+    <div class="hero-badge">⛺ 天恩農場露營</div>
+    <div class="hero-badge">🌳 神木群步道</div>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <div class="nav-tabs">
+    <div class="nav-tab active" data-tab="info">📋 基本資訊</div>
+    <div class="nav-tab" data-tab="day1">Day 1</div>
+    <div class="nav-tab" data-tab="day2">Day 2</div>
+    <div class="nav-tab" data-tab="rules">⚠️ 注意事項</div>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ══════════════ 基本資訊 ══════════════ -->
+<div id="section-info" class="section active">
+
+  <div class="section-title">🚗 租車資訊</div>
+  <div class="card">
+    <table class="info-table">
+      <tr><td>門市</td><td>格上租車 中和站 <br/>新北市中和區連和里連城路126號</td></tr>
+      <tr><td>領車</td><td>9/19（六）11:40</td></tr>
+      <tr><td>還車</td><td>9/20（日）19:45　<span style="color:var(--coral);font-weight:700;">⚠ 20:00 前務必完成</span></td></tr>
+      <tr><td>攜帶</td><td>身分證、駕照（駕駛人保險用途）</td></tr>
+      <tr><td>費用</td><td>估計總費用 $5,000　<span class="tl-tag green">Sunny 已墊付</span></td></tr>
+    </table>
+  </div>
+
+  <div class="section-title">⛺ 營區資訊</div>
+  <div class="card">
+    <table class="info-table">
+      <tr><td>營區</td><td>拉拉山天恩農場 <br/>1001-1500m中高海拔</td></tr>
+	  <tr><td>帳位</td><td>A區狩獵帳</td></tr>
+	  <tr><td>設備</td><td>雙人睡眠裝備2套、4人餐桌椅</td></tr>
+      <tr><td>費用</td><td>$4,800　<span class="tl-tag green">羽秀 已墊付</span></td></tr>
+      <tr><td>自備</td><td>個人餐具、盥洗用品</td></tr>
+      <tr><td>裝備</td><td>卡式爐（老弟跟朋友借）、湯鍋（羽秀帶）</td></tr>
+    </table>
+  </div>
+
+  <div class="section-title">🍗 光明農場（可電話外帶至營區）</div>
+  <div class="card">
+    <table class="info-table">
+      <tr><td>品項</td><td>馬告磚窯雞　$900</td></tr>
+      <tr><td>電話</td><td>0913-566218 / 03-3912555</td></tr>
+    </table>
+  </div>
+
+  <div class="section-title">💴 費用總覽</div>
+  <div class="card">
+    <table class="transport-table">
+      <thead><tr><th>項目</th><th>金額</th><th>備註</th></tr></thead>
+      <tbody>
+        <tr><td>營區</td><td>$4,800</td><td>羽秀已墊付</td></tr>
+        <tr><td>租車</td><td>約 $5,000</td><td>Sunny 已墊付</td></tr>
+        <tr><td>遊樂區門票</td><td>$150 / 人</td><td>全票</td></tr>
+        <tr><td>遊樂區小型車</td><td>$100 / 車</td><td>-</td></tr>
+        <tr class="highlight"><td>馬告磚窯雞</td><td>$900</td><td>光明農場電話外帶</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- ══════════════ DAY 1 ══════════════ -->
+<div id="section-day1" class="section">
+
+  <div class="day-label">
+    <div class="day-num">1</div>
+    <div class="day-info">
+      <div class="day-date">9/19（六）</div>
+      <div class="day-theme">領車 → 採買 → 天恩農場紮營</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <ul class="timeline">
+      <li class="tl-item">
+        <div class="tl-time key">11:40</div>
+        <div class="tl-body">
+          <div class="tl-main">格上租車 中和站門市 領車</div>
+          <div class="tl-note">我、老弟出發，攜帶身分證、駕照（駕駛人保險用途）</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">12:10</div>
+        <div class="tl-body">
+          <div class="tl-main">雙和醫院 第二醫療大樓1F 出發</div>
+          <div class="tl-note">集合點</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">13:00</div>
+        <div class="tl-body">
+          <div class="tl-main">八德大潤發<span class="tl-tag">車程約 40 分鐘</span></div>
+          <div class="tl-note">午餐(熟食車上吃)＋採買：肉品、海鮮、蔬菜、飲料、水、瓦斯罐</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">16:30</div>
+        <div class="tl-body">
+          <div class="tl-main">拉拉山天恩農場<span class="tl-tag">車程約 2 小時 30 分</span></div>
+          <div class="tl-note">抵達營區，紮營、準備晚餐</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">晚間</div>
+        <div class="tl-body">
+          <div class="tl-main">光明農場 電話外帶<span class="tl-tag coral">馬告磚窯雞 $900</span></div>
+          <div class="tl-note">電話 0913-566218 / 03-3912555</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="alert alert-info">
+    <strong>💡 時間提醒：</strong>大潤發採買建議控制在 1 小時內，避免開車視野不佳。
+  </div>
+
+</div>
+
+<!-- ══════════════ DAY 2 ══════════════ -->
+<div id="section-day2" class="section">
+
+  <div class="day-label coral">
+    <div class="day-num">2</div>
+    <div class="day-info">
+      <div class="day-date">9/20（日）</div>
+      <div class="day-theme">神木群步道 → 賦歸還車</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <ul class="timeline">
+      <li class="tl-item">
+        <div class="tl-time key">10:30 前</div>
+        <div class="tl-body">
+          <div class="tl-main">用餐、收拾、開離露營區</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">約15分</div>
+        <div class="tl-body">
+          <div class="tl-main">拉拉山國家森林遊樂區 神木群步道</div>
+          <div class="tl-note">全程約 3.7 公里，輕鬆走、邊拍照邊休息，約需 1.5–3 小時</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">下午</div>
+        <div class="tl-body">
+          <div class="tl-main">回程用餐</div>
+          <div class="tl-note">沿路找一家</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time">19:00</div>
+        <div class="tl-body">
+          <div class="tl-main">板橋</div>
+          <div class="tl-note">路過點</div>
+        </div>
+      </li>
+      <li class="tl-item">
+        <div class="tl-time key">19:45</div>
+        <div class="tl-body">
+          <div class="tl-main">格上租車 中和站門市 還車</div>
+          <div class="tl-note"><span style="color:var(--coral);font-weight:700;">⚠ 20:00 前務必完成</span></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="alert alert-warn">
+    <strong>⚠ 起霧風險：</strong>拉拉山區下午 2:30–3:00 後容易起大霧，神木群步道建議最晚 13:00 前開始下撤，確保安全下山。
+  </div>
+
+  <div class="section-title">🎫 遊樂區票價</div>
+  <div class="card">
+    <table class="info-table">
+      <tr><td>全票</td><td>$150 / 人</td></tr>
+      <tr><td>小型車</td><td>$100 / 車</td></tr>
+    </table>
+  </div>
+
+</div>
+
+<!-- ══════════════ 注意事項 ══════════════ -->
+<div id="section-rules" class="section">
+
+  <div class="section-title">⚠️ 行前提醒</div>
+  <div class="alert alert-warn">
+    <strong>採買：</strong>Day 1 於八德大潤發採買晚餐與隔天早餐食材。
+  </div>
+  <div class="alert alert-warn">
+    <strong>還車時限：</strong>Day 2 20:00 前必須至門市還車。
+  </div>
+  <div class="alert alert-info">
+    <strong>裝備分工：</strong>老弟跟朋友借一組卡式爐，羽秀帶湯鍋。
+  </div>
+  <div class="alert alert-warn">
+    <strong>起霧提醒：</strong>拉拉山區下午 2 點半至 3 點之後容易起大霧，山區行程請提早安排。
+  </div>
+
+  <div class="section-title">⛺ 營區規範</div>
+  <div class="card">
+    <ol class="rule-list">
+      <li>自備「個人餐具、盥洗用品」</li>
+      <li>垃圾分類：一般垃圾、資源回收、廚餘，放置於指定集中區，勿任意丟棄以維護營地整潔</li>
+      <li>帳篷內禁「爐火、飲食、垃圾、穿鞋入內」</li>
+      <li>晚上 10 點後勿大聲喧嘩</li>
+    </ol>
+  </div>
+
+  <div class="section-title">🎒 裝備確認</div>
+  <div class="card">
+    <ul class="checklist">
+      <li><div class="box"></div>卡式爐<span class="who">老弟借</span></li>
+      <li><div class="box"></div>湯鍋<span class="who">羽秀帶</span></li>
+      <li><div class="box"></div>個人餐具<span class="who">每人自備</span></li>
+      <li><div class="box"></div>盥洗用品<span class="who">每人自備</span></li>
+      <li><div class="box"></div>瓦斯罐<span class="who">Day 1 大潤發採買</span></li>
+      <li><div class="box"></div>身分證、駕照<span class="who">領車用</span></li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- end content -->
+</div>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
+  document.querySelectorAll('.nav-tab').forEach(function(t){ t.classList.remove('active'); });
+  var sec = document.getElementById('section-' + id);
+  if (sec) sec.classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach(function(t){
+    if (t.getAttribute('data-tab') === id) t.classList.add('active');
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.nav-tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      var id = this.getAttribute('data-tab');
+      if (id) showTab(id);
+    });
+  });
+});
+</script>
+</body>
+</html>
